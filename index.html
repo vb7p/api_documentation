@@ -6,7 +6,7 @@
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>7Park Data API Reference</title>
-
+    <link href="images/favicon.ico" rel="icon" type="image/ico" />
     <style>
       .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
@@ -198,7 +198,7 @@
     </style>
     <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print.css" rel="stylesheet" media="print" />
-      <script src="javascripts/all.js"></script>
+      <script src="javascripts/all_nosearch.js"></script>
   </head>
 
   <body class="index" data-languages="[&quot;shell&quot;,&quot;python&quot;]">
@@ -214,34 +214,64 @@
               <a href="#" data-language-name="shell">cURL</a>
               <a href="#" data-language-name="python">Python</a>
         </div>
-        <div class="search">
-          <input type="text" class="search" id="input-search" placeholder="Search">
-        </div>
-        <ul class="search-results"></ul>
       <ul id="toc" class="toc-list-h1">
           <li>
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
-          </li>
-          <li>
-            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
-          </li>
-          <li>
-            <a href="#company-metadata" class="toc-h1 toc-link" data-title="Company Metadata">Company Metadata</a>
               <ul class="toc-list-h2">
+                  <li>
+                    <a href="#authentication" class="toc-h2 toc-link" data-title="Authentication">Authentication</a>
+                  </li>
+                  <li>
+                    <a href="#rate-limits" class="toc-h2 toc-link" data-title="Rate Limits">Rate Limits</a>
+                  </li>
+                  <li>
+                    <a href="#errors" class="toc-h2 toc-link" data-title="Errors">Errors</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#metadata" class="toc-h1 toc-link" data-title="Metadata">Metadata</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#the-company-object" class="toc-h2 toc-link" data-title="The Company Object">The Company Object</a>
+                  </li>
                   <li>
                     <a href="#list-all-companies" class="toc-h2 toc-link" data-title="List all Companies">List all Companies</a>
                   </li>
                   <li>
-                    <a href="#get-a-specific-company" class="toc-h2 toc-link" data-title="Get a Specific Company">Get a Specific Company</a>
+                    <a href="#retrieve-a-company" class="toc-h2 toc-link" data-title="Retrieve a Company">Retrieve a Company</a>
                   </li>
                   <li>
-                    <a href="#retrieve-company-hierarchy" class="toc-h2 toc-link" data-title="Retrieve Company Hierarchy">Retrieve Company Hierarchy</a>
+                    <a href="#retrieve-a-company-39-s-hierarchy" class="toc-h2 toc-link" data-title="Retrieve a Company's Hierarchy">Retrieve a Company's Hierarchy</a>
                   </li>
                   <li>
-                    <a href="#get-company-metrics" class="toc-h2 toc-link" data-title="Get Company Metrics">Get Company Metrics</a>
+                    <a href="#the-metric-object" class="toc-h2 toc-link" data-title="The Metric Object">The Metric Object</a>
                   </li>
                   <li>
-                    <a href="#get-entities" class="toc-h2 toc-link" data-title="Get Entities">Get Entities</a>
+                    <a href="#list-all-metrics" class="toc-h2 toc-link" data-title="List all Metrics">List all Metrics</a>
+                  </li>
+                  <li>
+                    <a href="#retrieve-a-metric" class="toc-h2 toc-link" data-title="Retrieve a Metric">Retrieve a Metric</a>
+                  </li>
+                  <li>
+                    <a href="#the-entity-object" class="toc-h2 toc-link" data-title="The Entity Object">The Entity Object</a>
+                  </li>
+                  <li>
+                    <a href="#list-all-entities" class="toc-h2 toc-link" data-title="List all Entities">List all Entities</a>
+                  </li>
+                  <li>
+                    <a href="#retrieve-a-entity" class="toc-h2 toc-link" data-title="Retrieve a Entity">Retrieve a Entity</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#time-series" class="toc-h1 toc-link" data-title="Time Series">Time Series</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#retrieve-metadata" class="toc-h2 toc-link" data-title="Retrieve Metadata">Retrieve Metadata</a>
+                  </li>
+                  <li>
+                    <a href="#retrieve-timeseries" class="toc-h2 toc-link" data-title="Retrieve Timeseries">Retrieve Timeseries</a>
                   </li>
               </ul>
           </li>
@@ -262,20 +292,6 @@
                   </li>
               </ul>
           </li>
-          <li>
-            <a href="#time-series" class="toc-h1 toc-link" data-title="Time Series">Time Series</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#retrieve-metadata" class="toc-h2 toc-link" data-title="Retrieve Metadata">Retrieve Metadata</a>
-                  </li>
-                  <li>
-                    <a href="#retrieve-timeseries" class="toc-h2 toc-link" data-title="Retrieve Timeseries">Retrieve Timeseries</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
-            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
-          </li>
       </ul>
         <ul class="toc-footer">
             <li><a href='https://account.7parkdata.com'>Sign Up for a Developer Key</a></li>
@@ -293,25 +309,32 @@
 <p>For assistance with the Key Metrics API, please contact <a href="mailto:support@7parkdata.com">support@7parkdata.com</a>.</p>
 
 <p>The 7Park Data API is organized around REST. Our API has predictable resource-oriented URLs, accepts form-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs.</p>
+
+<!-- Click Run in Postman below to save every API request as a Postman collection for ease of testing. -->
+
+<!-- [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/d89a9462e82593705d8a) -->
+
+<!-- [![Open Swagger Spec](https://i.imgur.com/Y1oYTN0.png)](https://app.getpostman.com/run-collection/d89a9462e82593705d8a) -->
 <pre class="highlight shell tab-shell"><code><span class="c"># BASE URL:</span>
 https://api.7parkdata.com
-</code></pre><h1 id='authentication'>Authentication</h1>
+</code></pre><h2 id='authentication'>Authentication</h2>
 <blockquote>
-<p>To authorize, query using your generated &#39;client_id&#39; and &#39;client_secret&#39;:</p>
+<p>To authenticate, query using your generated &#39;client_id&#39; and &#39;client_secret&#39;:</p>
 </blockquote>
-<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
+<pre class="highlight python tab-python"><code><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">i</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">pypi</span><span class="o">.</span><span class="mi">7</span><span class="n">parkdata</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">simple</span><span class="o">/</span> <span class="n">parklib</span><span class="o">-</span><span class="n">sdk</span>
+<span class="c"># replace client_id / client_secret with your credentials.</span>
+<span class="n">export</span> <span class="n">PARK_API_CLIENT_ID</span><span class="o">=&lt;</span><span class="n">client_id</span><span class="o">&gt;</span>
+<span class="n">export</span> <span class="n">PARK_API_CLIENT_SECRET</span><span class="o">=&lt;</span><span class="n">client_secret</span><span class="o">&gt;</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl -X POST <span class="se">\</span>
   https://api.7parkdata.com/oauth/token <span class="se">\</span>
   -d <span class="s1">'{
   "client_id": {client_id},
   "client_secret": {client_secret}
 }'</span>
-<span class="c"># replace {client_id} and {client_secret} with your generated values</span>
+<span class="c"># replace {client_id} and {client_secret} with your generated values from the developer portal</span>
 </code></pre>
 <blockquote>
-<p>The &#39;access_token&#39; in the below response will be your {token} for authentication</p>
+<p>The &#39;access_token&#39; in the below example response will be your {token} for authentication for all future API Requests</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiI"</span><span class="p">,</span><span class="w">
@@ -325,17 +348,114 @@ https://api.7parkdata.com
 
 <p><code>Authorization: Bearer {token}</code></p>
 
+<p>You must replace <code>{token}</code> with the access token provided in the <code>/oauth/token</code> response.</p>
+
 <aside class="notice">
-You must replace <code>{token}</code> with the access token provided in the <code>/oauth/token</code> response.
+The access token expires every 24 hours. After which, you must get a new one to use to authenticate future API Requests.
 </aside>
-<h1 id='company-metadata'>Company Metadata</h1><h2 id='list-all-companies'>List all Companies</h2>
+<h2 id='rate-limits'>Rate Limits</h2>
+<p>This API is rate limited.</p>
+
+<p>The default user will receive the following usage plan:</p>
+
+<ul>
+<li>10 requests per second</li>
+<li>burst 15 requests</li>
+<li>quota of 5,000 requests per week starting on Sunday</li>
+</ul>
+
+<p>If you would like to inquire regarding increasing your rate limit, please contact <a href="mailto:support@7parkdata.com">support@7parkdata.com</a>.</p>
+<h2 id='errors'>Errors</h2>
+<p>The 7Park Data API uses the following error codes:</p>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too Many Requests</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error</td>
+</tr>
+<tr>
+<td>502</td>
+<td>Bad Gateway</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable</td>
+</tr>
+<tr>
+<td>504</td>
+<td>Gateway Timeout</td>
+</tr>
+</tbody></table>
+<h1 id='metadata'>Metadata</h1>
+<p>The Metadata sections will help you build queries for retrieving Time Series and Forecast Data.</p>
+
+<p>The Metadata required in all Time Series and Forecast queries are:</p>
+
+<ul>
+<li><code>company_id</code></li>
+<li><code>metric_id</code></li>
+<li><code>entity_id</code></li>
+</ul>
+<h2 id='the-company-object'>The Company Object</h2>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>company_id</td>
+<td>number</td>
+<td>The company identifier.</td>
+</tr>
+<tr>
+<td>company_name</td>
+<td>string</td>
+<td>The company name. E.g. <code>Netflix, Inc.</code></td>
+</tr>
+<tr>
+<td>ticker</td>
+<td>string</td>
+<td>Company ticker symbol. E.g. <code>NFLX</code></td>
+</tr>
+</tbody></table>
+<h2 id='list-all-companies'>List all Companies</h2>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
-<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/companies"</span>
+<span class="n">querystring</span> <span class="o">=</span> <span class="p">{</span><span class="s">"search"</span> <span class="p">:</span> <span class="s">"netflix"</span><span class="p">}</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span> <span class="p">:</span> <span class="s">"Bearer "</span><span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="n">querystring</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
   <span class="s1">'https://api.7parkdata.com/companies/?search=netflix'</span> <span class="se">\</span>
   -H <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
@@ -377,14 +497,16 @@ You must replace <code>{token}</code> with the access token provided in the <cod
 <td>Keyword search</td>
 </tr>
 </tbody></table>
-<h2 id='get-a-specific-company'>Get a Specific Company</h2>
+<h2 id='retrieve-a-company'>Retrieve a Company</h2>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
-<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/company/4354"</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span> <span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
   <span class="s1">'https://api.7parkdata.com/company/4354'</span> <span class="se">\</span>
   -H <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
@@ -416,17 +538,19 @@ You must replace <code>{token}</code> with the access token provided in the <cod
 <td>path</td>
 <td>true</td>
 <td>number</td>
-<td>company_id</td>
+<td>The company identifier.</td>
 </tr>
 </tbody></table>
-<h2 id='retrieve-company-hierarchy'>Retrieve Company Hierarchy</h2>
+<h2 id='retrieve-a-company-39-s-hierarchy'>Retrieve a Company&#39;s Hierarchy</h2>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
-<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/company/4354/hierarchy"</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span> <span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
   <span class="s1">'https://api.7parkdata.com/company/4354/hierarchy'</span> <span class="se">\</span>
   -H <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
@@ -474,17 +598,43 @@ You must replace <code>{token}</code> with the access token provided in the <cod
 <td>path</td>
 <td>true</td>
 <td>number</td>
-<td>company_id</td>
+<td>The company identifier.</td>
 </tr>
 </tbody></table>
-<h2 id='get-company-metrics'>Get Company Metrics</h2>
+<h2 id='the-metric-object'>The Metric Object</h2>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>metric_id</td>
+<td>number</td>
+<td>The metric identifier.</td>
+</tr>
+<tr>
+<td>metric_name</td>
+<td>string</td>
+<td>The metric name. E.g. <code>App Downloads</code></td>
+</tr>
+<tr>
+<td>metric_description</td>
+<td>string</td>
+<td>Description of the metric. E.g. <code>Count of Android &amp; iOS app store downloads</code></td>
+</tr>
+</tbody></table>
+<h2 id='list-all-metrics'>List all Metrics</h2>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
-<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/company/4354/metrics"</span>
+<span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">"Authorization"</span> <span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
+<span class="n">response</span><span class="o">=</span><span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
   <span class="s1">'https://api.7parkdata.com/company/4354/metrics'</span> <span class="se">\</span>
   -H <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
@@ -510,7 +660,7 @@ You must replace <code>{token}</code> with the access token provided in the <cod
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Get Company Metrics.</p>
+<p>List all Company Metrics.</p>
 <h3 id='http-request-4'>HTTP Request</h3>
 <p><code>GET /company/{company_id}/metrics</code></p>
 <h3 id='parameters-4'>Parameters</h3>
@@ -531,14 +681,86 @@ You must replace <code>{token}</code> with the access token provided in the <cod
 <td>company_id</td>
 </tr>
 </tbody></table>
-<h2 id='get-entities'>Get Entities</h2>
+<h2 id='retrieve-a-metric'>Retrieve a Metric</h2>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
-<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/company/4354/metric/740"</span>
+<span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">"Authorization"</span> <span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
+<span class="n">response</span><span class="o">=</span><span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
+  <span class="s1">'https://api.7parkdata.com/company/4354/metric/740'</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">740</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"metric_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"App Downloads"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"metric_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Count of Android &amp; iOS app store downloads"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Retrieve a Company metric.</p>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>GET /company/{company_id}/metric/{metric_id}</code></p>
+<h3 id='parameters-5'>Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>In</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>company_id</td>
+<td>path</td>
+<td>true</td>
+<td>number</td>
+<td>company_id</td>
+</tr>
+<tr>
+<td>metric_id</td>
+<td>path</td>
+<td>true</td>
+<td>number</td>
+<td>metric_id</td>
+</tr>
+</tbody></table>
+<h2 id='the-entity-object'>The Entity Object</h2>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>entity_id</td>
+<td>number</td>
+<td>The entity identifier.</td>
+</tr>
+<tr>
+<td>entity_name</td>
+<td>string</td>
+<td>The entity name. E.g. <code>Uber Eats: Local Food Delivery</code></td>
+</tr>
+</tbody></table>
+<h2 id='list-all-entities'>List all Entities</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/company/14301/metric/740/entities"</span>
+<span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">"Authorization"</span> <span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
+<span class="n">response</span><span class="o">=</span><span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
   <span class="s1">'https://api.7parkdata.com/company/14301/metric/740/entities'</span> <span class="se">\</span>
   -H <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
@@ -571,79 +793,8 @@ You must replace <code>{token}</code> with the access token provided in the <cod
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Get Entities.</p>
-<h3 id='http-request-5'>HTTP Request</h3>
-<p><code>GET /company/{company_id}/metric/{metric_id}/entities</code></p>
-<h3 id='parameters-5'>Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>In</th>
-<th>Required</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>company_id</td>
-<td>path</td>
-<td>true</td>
-<td>number</td>
-<td>company_id</td>
-</tr>
-<tr>
-<td>metric_id</td>
-<td>path</td>
-<td>true</td>
-<td>number</td>
-<td>metric_id</td>
-</tr>
-</tbody></table>
-<h1 id='forecasts'>Forecasts</h1><h2 id='list-all-forecasts'>List all Forecasts</h2>
-<blockquote>
-<p>Example Request:</p>
-</blockquote>
-<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
-  <span class="s1">'https://api.7parkdata.com/forecasts'</span> <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
-</code></pre>
-<blockquote>
-<p>Example Response:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">124</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.7parkdata.com/forecasts/?page=2"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"previous"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2010</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Facebook"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1931918</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"entity_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Facebook &amp; Instagram"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">740</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"metric_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"App Downloads"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"forecast_metric_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Total MAU"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"recent_data_through"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-06-24"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10141</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lululemon Athletica"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">56810</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"entity_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lululemon"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">761</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"metric_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Receipt Revenue Index"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"forecast_metric_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Adjusted Revenue"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"recent_data_through"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-08-10"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>List all Forecasts.</p>
 <h3 id='http-request-6'>HTTP Request</h3>
-<p><code>GET /forecasts/</code></p>
+<p><code>GET /company/{company_id}/metric/{metric_id}/entities</code></p>
 <h3 id='parameters-6'>Parameters</h3>
 <table><thead>
 <tr>
@@ -655,97 +806,45 @@ You must replace <code>{token}</code> with the access token provided in the <cod
 </tr>
 </thead><tbody>
 <tr>
-<td>search</td>
-<td>query string</td>
-<td>false</td>
-<td>string</td>
-<td>Keyword search</td>
-</tr>
-<tr>
 <td>company_id</td>
-<td>query string</td>
-<td>false</td>
-<td>string</td>
+<td>path</td>
+<td>true</td>
+<td>number</td>
 <td>company_id</td>
 </tr>
 <tr>
-<td>ordering</td>
-<td>query string</td>
-<td>false</td>
-<td>string</td>
-<td>ordering</td>
-</tr>
-<tr>
-<td>page</td>
-<td>query string</td>
-<td>false</td>
-<td>string</td>
-<td>page</td>
-</tr>
-<tr>
-<td>page_size</td>
-<td>query string</td>
-<td>false</td>
-<td>string</td>
-<td>page_size</td>
+<td>metric_id</td>
+<td>path</td>
+<td>true</td>
+<td>number</td>
+<td>metric_id</td>
 </tr>
 </tbody></table>
-<h2 id='forecast-snapshots'>Forecast Snapshots</h2>
+<h2 id='retrieve-a-entity'>Retrieve a Entity</h2>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
-<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/company/14301/metric/740/entity/1927749"</span>
+<span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">"Authorization"</span> <span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
+<span class="n">response</span><span class="o">=</span><span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
-  <span class="s1">'https://api.7parkdata.com/company/14301/metric/740/entity/1940111/forecast/snapshot'</span> <span class="se">\</span>
+  <span class="s1">'https://api.7parkdata.com/company/14301/metric/740/entity/1927749'</span> <span class="se">\</span>
   -H <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
 </code></pre>
 <blockquote>
 <p>Example Response:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"business_entity_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Netflix"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"metricvals"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"forecast_model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Y/Y"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"period_effective_end_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-06-30"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"methodology"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unspecified"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"forecast"</span><span class="p">:</span><span class="w"> </span><span class="mf">47787.1869370347</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"data_through"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-07-09"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"period_effective_start_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-04-01"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"is_published"</span><span class="p">:</span><span class="w"> </span><span class="s2">"N"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"forecast_model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Y/Y"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"period_effective_end_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-30"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"methodology"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unspecified"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"forecast"</span><span class="p">:</span><span class="w"> </span><span class="mf">52153.251969142</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"data_through"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-07-09"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"period_effective_start_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-01"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"is_published"</span><span class="p">:</span><span class="w"> </span><span class="s2">"N"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"forecast_model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Y/Y"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"period_effective_end_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-31"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"methodology"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unspecified"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"forecast"</span><span class="p">:</span><span class="w"> </span><span class="mf">54009.2938156461</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"data_through"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-07-09"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"period_effective_start_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-01"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"is_published"</span><span class="p">:</span><span class="w"> </span><span class="s2">"N"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">768</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4354</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"forecast_metric"</span><span class="p">:</span><span class="w"> </span><span class="s2">"U.S. Subscribers"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Netflix, Inc."</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"lpi"</span><span class="p">:</span><span class="w"> </span><span class="s2">"App Downloads"</span><span class="w">
+    </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1927749</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"entity_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Uber Eats: Local Food Delivery"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Snapshot of forecasts as published in Excel reports.</p>
+<p>Get Entities.</p>
 <h3 id='http-request-7'>HTTP Request</h3>
-<p><code>GET /company/{company_id}/metric/{metric_id}/entity/{entity_id}/forecast/snapshot</code></p>
+<p><code>GET /company/{company_id}/metric/{metric_id}/entity/{entity_id}</code></p>
 <h3 id='parameters-7'>Parameters</h3>
 <table><thead>
 <tr>
@@ -760,212 +859,27 @@ You must replace <code>{token}</code> with the access token provided in the <cod
 <td>company_id</td>
 <td>path</td>
 <td>true</td>
-<td>string</td>
+<td>number</td>
 <td>company_id</td>
 </tr>
 <tr>
 <td>metric_id</td>
 <td>path</td>
 <td>true</td>
-<td>string</td>
+<td>number</td>
 <td>metric_id</td>
-</tr>
-<tr>
-<td>entity_id</td>
-<td>path</td>
-<td>true</td>
-<td>string</td>
-<td>entity_id</td>
-</tr>
-</tbody></table>
-<h2 id='forecast-data'>Forecast Data</h2>
-<blockquote>
-<p>Example Request:</p>
-</blockquote>
-<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
-  <span class="s1">'https://api.7parkdata.com/company/4354/metric/740/entity/1940111/forecast'</span> <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
-</code></pre>
-<blockquote>
-<p>Example Response:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"forecast_metric_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"U.S. Subscribers"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"forecast_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"period_effective_start_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-04-01"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"period_effective_end_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-06-30"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"entity_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Netflix"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"permission"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"forecast"</span><span class="p">:</span><span class="w"> </span><span class="mf">60588.4693430389</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"r_squared"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"correlation"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Based on quarter over quarter quarterly growth rates."</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"queries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1916255</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">768</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"metric_periodicity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Quarter_Over_Quarter"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"metric_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7Park Data"</span><span class="w">
-                </span><span class="p">},</span><span class="w">
-                </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1916255</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">704</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"metric_periodicity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Quarter_Over_Quarter"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"metric_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"reported"</span><span class="w">
-                </span><span class="p">}</span><span class="w">
-            </span><span class="p">]</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"forecast"</span><span class="p">:</span><span class="w"> </span><span class="mf">64069.7707137404</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"r_squared"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"correlation"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Based on year over year quarterly growth rates."</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"queries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1916255</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">768</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"metric_periodicity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Year_Over_Year"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"metric_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7Park Data"</span><span class="w">
-                </span><span class="p">},</span><span class="w">
-                </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1916255</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">704</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"metric_periodicity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Year_Over_Year"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"metric_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"reported"</span><span class="w">
-                </span><span class="p">}</span><span class="w">
-            </span><span class="p">]</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>Forecast info for company, metric and entity.</p>
-<h3 id='http-request-8'>HTTP Request</h3>
-<p><code>GET /company/{company_id}/metric/{metric_id}/entity/{entity_id}/forecast</code></p>
-<h3 id='parameters-8'>Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>In</th>
-<th>Required</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>company_id</td>
-<td>path</td>
-<td>true</td>
-<td>string</td>
-<td>company_id</td>
-</tr>
-<tr>
-<td>metric_id</td>
-<td>path</td>
-<td>true</td>
-<td>string</td>
-<td>metric_id</td>
-</tr>
-<tr>
-<td>entity_id</td>
-<td>path</td>
-<td>true</td>
-<td>string</td>
-<td>entity_id</td>
-</tr>
-</tbody></table>
-<h2 id='historical-forecasts'>Historical Forecasts</h2>
-<blockquote>
-<p>Example Request:</p>
-</blockquote>
-<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
-  <span class="s1">'https://api.7parkdata.com/company/14301/metric/740/entity/1940111/forecast/history'</span> <span class="se">\</span>
-  -H <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
-</code></pre>
-<blockquote>
-<p>Example Response:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"reported_metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">704</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1916255</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">768</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-    </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">768</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"metric_periodicity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Quarter_Over_Quarter"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"entity_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Netflix"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Netflix, Inc."</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"period_effective_end_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-31"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"methodology"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unspecified"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"forecast"</span><span class="p">:</span><span class="w"> </span><span class="mf">56060.01019</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"data_through"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-04-09"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"forecast_unit"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"correlation"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"period_effective_start_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-01-01"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"r_squared"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"metric_name_reported"</span><span class="p">:</span><span class="w"> </span><span class="s2">"U.S. Subscribers"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"metric_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DownloadsAndroidiOS"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"company name: Netflix, Inc.; entity: Netflix; dimensions: {}; metric: DownloadsAndroidiOS; metric_periodicity: N/A"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>Historical forecast info for company, metric and entity.</p>
-<h3 id='http-request-9'>HTTP Request</h3>
-<p><code>GET /company/{company_id}/metric/{metric_id}/entity/{entity_id}/forecast/history</code></p>
-<h3 id='parameters-9'>Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>In</th>
-<th>Required</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>company_id</td>
-<td>path</td>
-<td>true</td>
-<td>string</td>
-<td>company_id</td>
-</tr>
-<tr>
-<td>metric_id</td>
-<td>path</td>
-<td>true</td>
-<td>string</td>
-<td>metric_id</td>
-</tr>
-<tr>
-<td>entity_id</td>
-<td>path</td>
-<td>true</td>
-<td>string</td>
-<td>entity_id</td>
 </tr>
 </tbody></table>
 <h1 id='time-series'>Time Series</h1><h2 id='retrieve-metadata'>Retrieve Metadata</h2>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
-<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/company/14301/metric/740/entity/1927747/queries"</span>
+<span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">"Authorization"</span> <span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
+<span class="n">response</span><span class="o">=</span><span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
   <span class="s1">'https://api.7parkdata.com/company/14301/metric/740/entity/1927747/queries'</span> <span class="se">\</span>
   -H <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
@@ -995,9 +909,9 @@ You must replace <code>{token}</code> with the access token provided in the <cod
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Retrieve Metadata.</p>
-<h3 id='http-request-10'>HTTP Request</h3>
+<h3 id='http-request-8'>HTTP Request</h3>
 <p><code>GET /company/{company_id}/metric/{metric_id}/entity/{entity_id}/queries</code></p>
-<h3 id='parameters-10'>Parameters</h3>
+<h3 id='parameters-8'>Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1033,10 +947,12 @@ You must replace <code>{token}</code> with the access token provided in the <cod
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
-<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/data?entity_id=1927747&amp;metric_periodicity=Daily&amp;country_name=United</span><span class="si">%20</span><span class="s">States</span><span class="si">%20</span><span class="s">of</span><span class="si">%20</span><span class="s">America&amp;metric_id=740"</span>
+<span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">"Authorization"</span> <span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
+<span class="n">response</span><span class="o">=</span><span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
   <span class="s1">'https://api.7parkdata.com/data?entity_id=1927747&amp;metric_periodicity=Daily&amp;country_name=United%20States%20of%20America&amp;metric_id=740'</span> <span class="se">\</span>
   -H <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
@@ -1087,9 +1003,9 @@ You must replace <code>{token}</code> with the access token provided in the <cod
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Data: Retrieve a time series for a specific entity/metric</p>
-<h3 id='http-request-11'>HTTP Request</h3>
+<h3 id='http-request-9'>HTTP Request</h3>
 <p><code>GET /data</code></p>
-<h3 id='parameters-11'>Parameters</h3>
+<h3 id='parameters-9'>Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1163,62 +1079,432 @@ You must replace <code>{token}</code> with the access token provided in the <cod
 <td>discovery_name</td>
 </tr>
 </tbody></table>
-<h1 id='errors'>Errors</h1>
-<aside class="notice">
-This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
-</aside>
 
-<p>The Kittn API uses the following error codes:</p>
+<!-- # NER
 
+## Annotate
+
+> Example Request:
+
+```python
+from parklib.sdk.ner import NER
+
+ner_result = NER.execute(source_type='news', instances=["Apple is a company"])
+print(ner_result)
+```
+
+```shell
+curl -X POST \
+  https://api.7parkdata.com/ner/annotate \
+  -H 'Authorization: Bearer {token}' \
+  -d '{
+       "source_type": "news",
+       "instances": [
+              "Apple is a company."
+       ]
+}'
+```
+
+> Example Response:
+
+```json
+{
+    "results": [
+        {
+            "doc_index": 0,
+            "preprocessed": "Apple is a company.",
+            "ner": [
+                {
+                    "start_pos": 0,
+                    "type": "NE_ORG",
+                    "key": "Apple",
+                    "end_pos": 5
+                }
+            ]
+        }
+    ]
+}
+```
+
+Named-entity recognition (NER) (also known as entity identification, entity chunking and entity extraction) is a subtask of information extraction that seeks to locate and classify named entity mentions in unstructured text into pre-defined categories such as the person names, organizations, locations, medical codes, time expressions, quantities, monetary values, percentages, etc.
+
+### HTTP Request
+
+`POST /ner/annotate`
+
+### Parameters
+
+Parameter | In | Required | Type | Description
+--------- | -- | -------- | ----------- | -----------
+source_type | body | true | string | Source type to consider. Options include: `news`, `tweets`, and `credit card`
+entity_types | body | false | array | Entity types to consider. Options include: `NE_TITLE`, `NE_PERSON`, and `NE_ORG`.
+instances | body | true | array | A list of strings that you wish to be recognized. -->
+<h1 id='forecasts'>Forecasts</h1><h2 id='list-all-forecasts'>List all Forecasts</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/forecasts"</span>
+<span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">"Authorization"</span> <span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
+<span class="n">response</span><span class="o">=</span><span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
+  <span class="s1">'https://api.7parkdata.com/forecasts'</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">124</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.7parkdata.com/forecasts/?page=2"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"previous"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2010</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Facebook"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1931918</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"entity_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Facebook &amp; Instagram"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">740</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"metric_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"App Downloads"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"forecast_metric_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Total MAU"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"recent_data_through"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-06-24"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10141</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lululemon Athletica"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">56810</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"entity_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lululemon"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">761</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"metric_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Receipt Revenue Index"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"forecast_metric_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Adjusted Revenue"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"recent_data_through"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-08-10"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>List all Forecasts.</p>
+<h3 id='http-request-10'>HTTP Request</h3>
+<p><code>GET /forecasts/</code></p>
+<h3 id='parameters-10'>Parameters</h3>
 <table><thead>
 <tr>
-<th>Error Code</th>
-<th>Meaning</th>
+<th>Parameter</th>
+<th>In</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>400</td>
-<td>Bad Request -- Your request is invalid.</td>
+<td>search</td>
+<td>query string</td>
+<td>false</td>
+<td>string</td>
+<td>Keyword search</td>
 </tr>
 <tr>
-<td>401</td>
-<td>Unauthorized -- Your API key is wrong.</td>
+<td>company_id</td>
+<td>query string</td>
+<td>false</td>
+<td>string</td>
+<td>company_id</td>
 </tr>
 <tr>
-<td>403</td>
-<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
+<td>ordering</td>
+<td>query string</td>
+<td>false</td>
+<td>string</td>
+<td>ordering</td>
 </tr>
 <tr>
-<td>404</td>
-<td>Not Found -- The specified kitten could not be found.</td>
+<td>page</td>
+<td>query string</td>
+<td>false</td>
+<td>string</td>
+<td>page</td>
 </tr>
 <tr>
-<td>405</td>
-<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
+<td>page_size</td>
+<td>query string</td>
+<td>false</td>
+<td>string</td>
+<td>page_size</td>
+</tr>
+</tbody></table>
+<h2 id='forecast-snapshots'>Forecast Snapshots</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/company/14301/metric/740/entity/1940111/forecast/snapshot"</span>
+<span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">"Authorization"</span> <span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
+<span class="n">response</span><span class="o">=</span><span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
+  <span class="s1">'https://api.7parkdata.com/company/14301/metric/740/entity/1940111/forecast/snapshot'</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"business_entity_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Netflix"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"metricvals"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"forecast_model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Y/Y"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"period_effective_end_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-06-30"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"methodology"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unspecified"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"forecast"</span><span class="p">:</span><span class="w"> </span><span class="mf">47787.1869370347</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"data_through"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-07-09"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"period_effective_start_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-04-01"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"is_published"</span><span class="p">:</span><span class="w"> </span><span class="s2">"N"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"forecast_model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Y/Y"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"period_effective_end_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-30"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"methodology"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unspecified"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"forecast"</span><span class="p">:</span><span class="w"> </span><span class="mf">52153.251969142</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"data_through"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-07-09"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"period_effective_start_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-01"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"is_published"</span><span class="p">:</span><span class="w"> </span><span class="s2">"N"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"forecast_model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Y/Y"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"period_effective_end_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-31"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"methodology"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unspecified"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"forecast"</span><span class="p">:</span><span class="w"> </span><span class="mf">54009.2938156461</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"data_through"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-07-09"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"period_effective_start_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-01"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"is_published"</span><span class="p">:</span><span class="w"> </span><span class="s2">"N"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">768</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4354</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"forecast_metric"</span><span class="p">:</span><span class="w"> </span><span class="s2">"U.S. Subscribers"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Netflix, Inc."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"lpi"</span><span class="p">:</span><span class="w"> </span><span class="s2">"App Downloads"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Snapshot of forecasts as published in Excel reports.</p>
+<h3 id='http-request-11'>HTTP Request</h3>
+<p><code>GET /company/{company_id}/metric/{metric_id}/entity/{entity_id}/forecast/snapshot</code></p>
+<h3 id='parameters-11'>Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>In</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>company_id</td>
+<td>path</td>
+<td>true</td>
+<td>string</td>
+<td>company_id</td>
 </tr>
 <tr>
-<td>406</td>
-<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
+<td>metric_id</td>
+<td>path</td>
+<td>true</td>
+<td>string</td>
+<td>metric_id</td>
 </tr>
 <tr>
-<td>410</td>
-<td>Gone -- The kitten requested has been removed from our servers.</td>
+<td>entity_id</td>
+<td>path</td>
+<td>true</td>
+<td>string</td>
+<td>entity_id</td>
+</tr>
+</tbody></table>
+<h2 id='forecast-data'>Forecast Data</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/company/4354/metric/740/entity/1940111/forecast"</span>
+<span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">"Authorization"</span> <span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
+<span class="n">response</span><span class="o">=</span><span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
+  <span class="s1">'https://api.7parkdata.com/company/4354/metric/740/entity/1940111/forecast'</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"forecast_metric_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"U.S. Subscribers"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"forecast_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"period_effective_start_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-04-01"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"period_effective_end_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-06-30"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"entity_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Netflix"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"permission"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"forecast"</span><span class="p">:</span><span class="w"> </span><span class="mf">60588.4693430389</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"r_squared"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"correlation"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Based on quarter over quarter quarterly growth rates."</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"queries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1916255</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">768</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"metric_periodicity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Quarter_Over_Quarter"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"metric_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7Park Data"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1916255</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">704</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"metric_periodicity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Quarter_Over_Quarter"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"metric_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"reported"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"forecast"</span><span class="p">:</span><span class="w"> </span><span class="mf">64069.7707137404</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"r_squared"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"correlation"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Based on year over year quarterly growth rates."</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"queries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1916255</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">768</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"metric_periodicity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Year_Over_Year"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"metric_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7Park Data"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1916255</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">704</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"metric_periodicity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Year_Over_Year"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"metric_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"reported"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Forecast info for company, metric and entity.</p>
+<h3 id='http-request-12'>HTTP Request</h3>
+<p><code>GET /company/{company_id}/metric/{metric_id}/entity/{entity_id}/forecast</code></p>
+<h3 id='parameters-12'>Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>In</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>company_id</td>
+<td>path</td>
+<td>true</td>
+<td>string</td>
+<td>company_id</td>
 </tr>
 <tr>
-<td>418</td>
-<td>I&#39;m a teapot.</td>
+<td>metric_id</td>
+<td>path</td>
+<td>true</td>
+<td>string</td>
+<td>metric_id</td>
 </tr>
 <tr>
-<td>429</td>
-<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
+<td>entity_id</td>
+<td>path</td>
+<td>true</td>
+<td>string</td>
+<td>entity_id</td>
+</tr>
+</tbody></table>
+<h2 id='historical-forecasts'>Historical Forecasts</h2>
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/company/14301/metric/740/entity/1940111/forecast/history"</span>
+<span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">"Authorization"</span> <span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
+<span class="n">response</span><span class="o">=</span><span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
+  <span class="s1">'https://api.7parkdata.com/company/14301/metric/740/entity/1940111/forecast/history'</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"reported_metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">704</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1916255</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">768</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">768</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"metric_periodicity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Quarter_Over_Quarter"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"entity_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Netflix"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Netflix, Inc."</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"period_effective_end_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-31"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"methodology"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unspecified"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"forecast"</span><span class="p">:</span><span class="w"> </span><span class="mf">56060.01019</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"data_through"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-04-09"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"forecast_unit"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"correlation"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"period_effective_start_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-01-01"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"r_squared"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"metric_name_reported"</span><span class="p">:</span><span class="w"> </span><span class="s2">"U.S. Subscribers"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"metric_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DownloadsAndroidiOS"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"company name: Netflix, Inc.; entity: Netflix; dimensions: {}; metric: DownloadsAndroidiOS; metric_periodicity: N/A"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Historical forecast info for company, metric and entity.</p>
+<h3 id='http-request-13'>HTTP Request</h3>
+<p><code>GET /company/{company_id}/metric/{metric_id}/entity/{entity_id}/forecast/history</code></p>
+<h3 id='parameters-13'>Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>In</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>company_id</td>
+<td>path</td>
+<td>true</td>
+<td>string</td>
+<td>company_id</td>
 </tr>
 <tr>
-<td>500</td>
-<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
+<td>metric_id</td>
+<td>path</td>
+<td>true</td>
+<td>string</td>
+<td>metric_id</td>
 </tr>
 <tr>
-<td>503</td>
-<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
+<td>entity_id</td>
+<td>path</td>
+<td>true</td>
+<td>string</td>
+<td>entity_id</td>
 </tr>
 </tbody></table>
 
