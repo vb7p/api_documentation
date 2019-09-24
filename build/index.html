@@ -225,6 +225,9 @@
                     <a href="#rate-limits" class="toc-h2 toc-link" data-title="Rate Limits">Rate Limits</a>
                   </li>
                   <li>
+                    <a href="#permissions" class="toc-h2 toc-link" data-title="Permissions">Permissions</a>
+                  </li>
+                  <li>
                     <a href="#errors" class="toc-h2 toc-link" data-title="Errors">Errors</a>
                   </li>
               </ul>
@@ -233,34 +236,49 @@
             <a href="#metadata" class="toc-h1 toc-link" data-title="Metadata">Metadata</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#the-company-object" class="toc-h2 toc-link" data-title="The Company Object">The Company Object</a>
+                    <a href="#company" class="toc-h2 toc-link" data-title="Company">Company</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#the-company-object" class="toc-h3 toc-link" data-title="The Company Object">The Company Object</a>
+                          </li>
+                          <li>
+                            <a href="#list-all-companies" class="toc-h3 toc-link" data-title="List all Companies">List all Companies</a>
+                          </li>
+                          <li>
+                            <a href="#retrieve-a-company" class="toc-h3 toc-link" data-title="Retrieve a Company">Retrieve a Company</a>
+                          </li>
+                          <li>
+                            <a href="#retrieve-a-company-39-s-hierarchy" class="toc-h3 toc-link" data-title="Retrieve a Company's Hierarchy">Retrieve a Company's Hierarchy</a>
+                          </li>
+                      </ul>
                   </li>
                   <li>
-                    <a href="#list-all-companies" class="toc-h2 toc-link" data-title="List all Companies">List all Companies</a>
+                    <a href="#metric" class="toc-h2 toc-link" data-title="Metric">Metric</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#the-metric-object" class="toc-h3 toc-link" data-title="The Metric Object">The Metric Object</a>
+                          </li>
+                          <li>
+                            <a href="#list-all-metrics" class="toc-h3 toc-link" data-title="List all Metrics">List all Metrics</a>
+                          </li>
+                          <li>
+                            <a href="#retrieve-a-metric" class="toc-h3 toc-link" data-title="Retrieve a Metric">Retrieve a Metric</a>
+                          </li>
+                      </ul>
                   </li>
                   <li>
-                    <a href="#retrieve-a-company" class="toc-h2 toc-link" data-title="Retrieve a Company">Retrieve a Company</a>
-                  </li>
-                  <li>
-                    <a href="#retrieve-a-company-39-s-hierarchy" class="toc-h2 toc-link" data-title="Retrieve a Company's Hierarchy">Retrieve a Company's Hierarchy</a>
-                  </li>
-                  <li>
-                    <a href="#the-metric-object" class="toc-h2 toc-link" data-title="The Metric Object">The Metric Object</a>
-                  </li>
-                  <li>
-                    <a href="#list-all-metrics" class="toc-h2 toc-link" data-title="List all Metrics">List all Metrics</a>
-                  </li>
-                  <li>
-                    <a href="#retrieve-a-metric" class="toc-h2 toc-link" data-title="Retrieve a Metric">Retrieve a Metric</a>
-                  </li>
-                  <li>
-                    <a href="#the-entity-object" class="toc-h2 toc-link" data-title="The Entity Object">The Entity Object</a>
-                  </li>
-                  <li>
-                    <a href="#list-all-entities" class="toc-h2 toc-link" data-title="List all Entities">List all Entities</a>
-                  </li>
-                  <li>
-                    <a href="#retrieve-a-entity" class="toc-h2 toc-link" data-title="Retrieve a Entity">Retrieve a Entity</a>
+                    <a href="#entity" class="toc-h2 toc-link" data-title="Entity">Entity</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#the-entity-object" class="toc-h3 toc-link" data-title="The Entity Object">The Entity Object</a>
+                          </li>
+                          <li>
+                            <a href="#list-all-entities" class="toc-h3 toc-link" data-title="List all Entities">List all Entities</a>
+                          </li>
+                          <li>
+                            <a href="#retrieve-a-entity" class="toc-h3 toc-link" data-title="Retrieve a Entity">Retrieve a Entity</a>
+                          </li>
+                      </ul>
                   </li>
               </ul>
           </li>
@@ -292,10 +310,75 @@
                   </li>
               </ul>
           </li>
+          <li>
+            <a href="#platform" class="toc-h1 toc-link" data-title="Platform">Platform</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#overview" class="toc-h2 toc-link" data-title="Overview">Overview</a>
+                  </li>
+                  <li>
+                    <a href="#quick-start-guide" class="toc-h2 toc-link" data-title="Quick Start Guide">Quick Start Guide</a>
+                  </li>
+                  <li>
+                    <a href="#examples" class="toc-h2 toc-link" data-title="Examples">Examples</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#enrich-records-in-a-sql-table-with-their-parent-company-s-ticker-symbol" class="toc-h3 toc-link" data-title="Enrich records in a SQL table with their parent company’s ticker symbol">Enrich records in a SQL table with their parent company’s ticker symbol</a>
+                          </li>
+                          <li>
+                            <a href="#disambiguate-a-column-of-a-sql-table-and-link-to-a-canonical-company" class="toc-h3 toc-link" data-title="Disambiguate a column of a sql table and link to a canonical company">Disambiguate a column of a sql table and link to a canonical company</a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li>
+                    <a href="#7park-tag" class="toc-h2 toc-link" data-title="7Park Tag">7Park Tag</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#execute" class="toc-h3 toc-link" data-title="Execute">Execute</a>
+                          </li>
+                          <li>
+                            <a href="#bulk" class="toc-h3 toc-link" data-title="Bulk">Bulk</a>
+                          </li>
+                          <li>
+                            <a href="#status" class="toc-h3 toc-link" data-title="Status">Status</a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li>
+                    <a href="#7park-cleanse" class="toc-h2 toc-link" data-title="7Park Cleanse">7Park Cleanse</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#string-distance" class="toc-h3 toc-link" data-title="String Distance">String Distance</a>
+                          </li>
+                          <li>
+                            <a href="#word-embedding" class="toc-h3 toc-link" data-title="Word Embedding">Word Embedding</a>
+                          </li>
+                          <li>
+                            <a href="#status-2" class="toc-h3 toc-link" data-title="Status">Status</a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li>
+                    <a href="#7park-link" class="toc-h2 toc-link" data-title="7Park Link">7Park Link</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#execute-2" class="toc-h3 toc-link" data-title="Execute">Execute</a>
+                          </li>
+                          <li>
+                            <a href="#bulk-2" class="toc-h3 toc-link" data-title="Bulk">Bulk</a>
+                          </li>
+                          <li>
+                            <a href="#status-3" class="toc-h3 toc-link" data-title="Status">Status</a>
+                          </li>
+                      </ul>
+                  </li>
+              </ul>
+          </li>
       </ul>
         <ul class="toc-footer">
-            <li><a href='https://account.7parkdata.com'>Sign Up for a Developer Key</a></li>
+            <li><a href='https://account.7parkdata.com/#/akm_key/'>Sign Up for a Developer Key</a></li>
             <li><a href='mailto:support@7parkdata.com'>Contact Us</a></li>
+            <li><a href='https://www.7parkdata.com/terms-of-use/'>Terms of Use</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -310,9 +393,9 @@
 
 <p>The 7Park Data API is organized around REST. Our API has predictable resource-oriented URLs, accepts form-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs.</p>
 
-<!-- Click Run in Postman below to save every API request as a Postman collection for ease of testing. -->
+<p>Click Run in Postman below to save every API request as a Postman collection for ease of testing.</p>
 
-<!-- [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/d89a9462e82593705d8a) -->
+<p><a href="https://app.getpostman.com/run-collection/d89a9462e82593705d8a"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <!-- [![Open Swagger Spec](https://i.imgur.com/Y1oYTN0.png)](https://app.getpostman.com/run-collection/d89a9462e82593705d8a) -->
 <pre class="highlight shell tab-shell"><code><span class="c"># BASE URL:</span>
@@ -365,6 +448,45 @@ The access token expires every 24 hours. After which, you must get a new one to 
 </ul>
 
 <p>If you would like to inquire regarding increasing your rate limit, please contact <a href="mailto:support@7parkdata.com">support@7parkdata.com</a>.</p>
+<h2 id='permissions'>Permissions</h2>
+<p>Permissions are handled at a company level.</p>
+
+<p>After you have been set up, you can verify which companies you have access to by querying this endpoint.</p>
+
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/permissions"</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span> <span class="p">:</span> <span class="s">"Bearer "</span><span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="n">querystring</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
+  <span class="s1">'https://api.7parkdata.com/permissions'</span> <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data_permission"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">788</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"metric_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Consumer Card Rev Index"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">14671</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Papa John's Pizza"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">738</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"metric_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"App Downloads (Android)"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7097</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Zillow"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h6 id='http-request'>HTTP Request</h6>
+<p><code>GET /permissions</code></p>
 <h2 id='errors'>Errors</h2>
 <p>The 7Park Data API uses the following error codes:</p>
 
@@ -421,7 +543,7 @@ The access token expires every 24 hours. After which, you must get a new one to 
 <li><code>metric_id</code></li>
 <li><code>entity_id</code></li>
 </ul>
-<h2 id='the-company-object'>The Company Object</h2>
+<h2 id='company'>Company</h2><h3 id='the-company-object'>The Company Object</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -445,7 +567,7 @@ The access token expires every 24 hours. After which, you must get a new one to 
 <td>Company ticker symbol. E.g. <code>NFLX</code></td>
 </tr>
 </tbody></table>
-<h2 id='list-all-companies'>List all Companies</h2>
+<h3 id='list-all-companies'>List all Companies</h3>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
@@ -477,9 +599,9 @@ The access token expires every 24 hours. After which, you must get a new one to 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Find Available Companies.</p>
-<h3 id='http-request'>HTTP Request</h3>
+<h6 id='http-request-2'>HTTP Request</h6>
 <p><code>GET /companies/</code></p>
-<h3 id='parameters'>Parameters</h3>
+<h6 id='parameters'>Parameters</h6>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -497,7 +619,7 @@ The access token expires every 24 hours. After which, you must get a new one to 
 <td>Keyword search</td>
 </tr>
 </tbody></table>
-<h2 id='retrieve-a-company'>Retrieve a Company</h2>
+<h3 id='retrieve-a-company'>Retrieve a Company</h3>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
@@ -521,9 +643,9 @@ The access token expires every 24 hours. After which, you must get a new one to 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Get a Specific Company.</p>
-<h3 id='http-request-2'>HTTP Request</h3>
+<h6 id='http-request-3'>HTTP Request</h6>
 <p><code>GET /company/{company_id}</code></p>
-<h3 id='parameters-2'>Parameters</h3>
+<h6 id='parameters-2'>Parameters</h6>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -541,7 +663,7 @@ The access token expires every 24 hours. After which, you must get a new one to 
 <td>The company identifier.</td>
 </tr>
 </tbody></table>
-<h2 id='retrieve-a-company-39-s-hierarchy'>Retrieve a Company&#39;s Hierarchy</h2>
+<h3 id='retrieve-a-company-39-s-hierarchy'>Retrieve a Company&#39;s Hierarchy</h3>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
@@ -581,9 +703,9 @@ The access token expires every 24 hours. After which, you must get a new one to 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Retrieve Company Hierarchy.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
+<h6 id='http-request-4'>HTTP Request</h6>
 <p><code>GET /company/{company_id}/hierarchy</code></p>
-<h3 id='parameters-3'>Parameters</h3>
+<h6 id='parameters-3'>Parameters</h6>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -601,7 +723,7 @@ The access token expires every 24 hours. After which, you must get a new one to 
 <td>The company identifier.</td>
 </tr>
 </tbody></table>
-<h2 id='the-metric-object'>The Metric Object</h2>
+<h2 id='metric'>Metric</h2><h3 id='the-metric-object'>The Metric Object</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -625,7 +747,7 @@ The access token expires every 24 hours. After which, you must get a new one to 
 <td>Description of the metric. E.g. <code>Count of Android &amp; iOS app store downloads</code></td>
 </tr>
 </tbody></table>
-<h2 id='list-all-metrics'>List all Metrics</h2>
+<h3 id='list-all-metrics'>List all Metrics</h3>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
@@ -661,9 +783,9 @@ The access token expires every 24 hours. After which, you must get a new one to 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>List all Company Metrics.</p>
-<h3 id='http-request-4'>HTTP Request</h3>
+<h6 id='http-request-5'>HTTP Request</h6>
 <p><code>GET /company/{company_id}/metrics</code></p>
-<h3 id='parameters-4'>Parameters</h3>
+<h6 id='parameters-4'>Parameters</h6>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -681,7 +803,7 @@ The access token expires every 24 hours. After which, you must get a new one to 
 <td>company_id</td>
 </tr>
 </tbody></table>
-<h2 id='retrieve-a-metric'>Retrieve a Metric</h2>
+<h3 id='retrieve-a-metric'>Retrieve a Metric</h3>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
@@ -705,9 +827,9 @@ The access token expires every 24 hours. After which, you must get a new one to 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Retrieve a Company metric.</p>
-<h3 id='http-request-5'>HTTP Request</h3>
+<h6 id='http-request-6'>HTTP Request</h6>
 <p><code>GET /company/{company_id}/metric/{metric_id}</code></p>
-<h3 id='parameters-5'>Parameters</h3>
+<h6 id='parameters-5'>Parameters</h6>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -732,7 +854,7 @@ The access token expires every 24 hours. After which, you must get a new one to 
 <td>metric_id</td>
 </tr>
 </tbody></table>
-<h2 id='the-entity-object'>The Entity Object</h2>
+<h2 id='entity'>Entity</h2><h3 id='the-entity-object'>The Entity Object</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -751,7 +873,7 @@ The access token expires every 24 hours. After which, you must get a new one to 
 <td>The entity name. E.g. <code>Uber Eats: Local Food Delivery</code></td>
 </tr>
 </tbody></table>
-<h2 id='list-all-entities'>List all Entities</h2>
+<h3 id='list-all-entities'>List all Entities</h3>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
@@ -793,9 +915,9 @@ The access token expires every 24 hours. After which, you must get a new one to 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Get Entities.</p>
-<h3 id='http-request-6'>HTTP Request</h3>
+<h6 id='http-request-7'>HTTP Request</h6>
 <p><code>GET /company/{company_id}/metric/{metric_id}/entities</code></p>
-<h3 id='parameters-6'>Parameters</h3>
+<h6 id='parameters-6'>Parameters</h6>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -820,7 +942,7 @@ The access token expires every 24 hours. After which, you must get a new one to 
 <td>metric_id</td>
 </tr>
 </tbody></table>
-<h2 id='retrieve-a-entity'>Retrieve a Entity</h2>
+<h3 id='retrieve-a-entity'>Retrieve a Entity</h3>
 <blockquote>
 <p>Example Request:</p>
 </blockquote>
@@ -843,9 +965,9 @@ The access token expires every 24 hours. After which, you must get a new one to 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Get Entities.</p>
-<h3 id='http-request-7'>HTTP Request</h3>
+<h6 id='http-request-8'>HTTP Request</h6>
 <p><code>GET /company/{company_id}/metric/{metric_id}/entity/{entity_id}</code></p>
-<h3 id='parameters-7'>Parameters</h3>
+<h6 id='parameters-7'>Parameters</h6>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -909,9 +1031,9 @@ The access token expires every 24 hours. After which, you must get a new one to 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Retrieve Metadata.</p>
-<h3 id='http-request-8'>HTTP Request</h3>
+<h6 id='http-request-9'>HTTP Request</h6>
 <p><code>GET /company/{company_id}/metric/{metric_id}/entity/{entity_id}/queries</code></p>
-<h3 id='parameters-8'>Parameters</h3>
+<h6 id='parameters-8'>Parameters</h6>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1003,9 +1125,9 @@ The access token expires every 24 hours. After which, you must get a new one to 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Data: Retrieve a time series for a specific entity/metric</p>
-<h3 id='http-request-9'>HTTP Request</h3>
+<h6 id='http-request-10'>HTTP Request</h6>
 <p><code>GET /data</code></p>
-<h3 id='parameters-9'>Parameters</h3>
+<h6 id='parameters-9'>Parameters</h6>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1079,66 +1201,6 @@ The access token expires every 24 hours. After which, you must get a new one to 
 <td>discovery_name</td>
 </tr>
 </tbody></table>
-
-<!-- # NER
-
-## Annotate
-
-> Example Request:
-
-```python
-from parklib.sdk.ner import NER
-
-ner_result = NER.execute(source_type='news', instances=["Apple is a company"])
-print(ner_result)
-```
-
-```shell
-curl -X POST \
-  https://api.7parkdata.com/ner/annotate \
-  -H 'Authorization: Bearer {token}' \
-  -d '{
-       "source_type": "news",
-       "instances": [
-              "Apple is a company."
-       ]
-}'
-```
-
-> Example Response:
-
-```json
-{
-    "results": [
-        {
-            "doc_index": 0,
-            "preprocessed": "Apple is a company.",
-            "ner": [
-                {
-                    "start_pos": 0,
-                    "type": "NE_ORG",
-                    "key": "Apple",
-                    "end_pos": 5
-                }
-            ]
-        }
-    ]
-}
-```
-
-Named-entity recognition (NER) (also known as entity identification, entity chunking and entity extraction) is a subtask of information extraction that seeks to locate and classify named entity mentions in unstructured text into pre-defined categories such as the person names, organizations, locations, medical codes, time expressions, quantities, monetary values, percentages, etc.
-
-### HTTP Request
-
-`POST /ner/annotate`
-
-### Parameters
-
-Parameter | In | Required | Type | Description
---------- | -- | -------- | ----------- | -----------
-source_type | body | true | string | Source type to consider. Options include: `news`, `tweets`, and `credit card`
-entity_types | body | false | array | Entity types to consider. Options include: `NE_TITLE`, `NE_PERSON`, and `NE_ORG`.
-instances | body | true | array | A list of strings that you wish to be recognized. -->
 <h1 id='forecasts'>Forecasts</h1><h2 id='list-all-forecasts'>List all Forecasts</h2>
 <blockquote>
 <p>Example Request:</p>
@@ -1185,9 +1247,9 @@ instances | body | true | array | A list of strings that you wish to be recogniz
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>List all Forecasts.</p>
-<h3 id='http-request-10'>HTTP Request</h3>
+<h6 id='http-request-11'>HTTP Request</h6>
 <p><code>GET /forecasts/</code></p>
-<h3 id='parameters-10'>Parameters</h3>
+<h6 id='parameters-10'>Parameters</h6>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1289,9 +1351,9 @@ instances | body | true | array | A list of strings that you wish to be recogniz
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Snapshot of forecasts as published in Excel reports.</p>
-<h3 id='http-request-11'>HTTP Request</h3>
+<h6 id='http-request-12'>HTTP Request</h6>
 <p><code>GET /company/{company_id}/metric/{metric_id}/entity/{entity_id}/forecast/snapshot</code></p>
-<h3 id='parameters-11'>Parameters</h3>
+<h6 id='parameters-11'>Parameters</h6>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1392,9 +1454,9 @@ instances | body | true | array | A list of strings that you wish to be recogniz
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Forecast info for company, metric and entity.</p>
-<h3 id='http-request-12'>HTTP Request</h3>
+<h6 id='http-request-13'>HTTP Request</h6>
 <p><code>GET /company/{company_id}/metric/{metric_id}/entity/{entity_id}/forecast</code></p>
-<h3 id='parameters-12'>Parameters</h3>
+<h6 id='parameters-12'>Parameters</h6>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1473,9 +1535,9 @@ instances | body | true | array | A list of strings that you wish to be recogniz
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Historical forecast info for company, metric and entity.</p>
-<h3 id='http-request-13'>HTTP Request</h3>
+<h6 id='http-request-14'>HTTP Request</h6>
 <p><code>GET /company/{company_id}/metric/{metric_id}/entity/{entity_id}/forecast/history</code></p>
-<h3 id='parameters-13'>Parameters</h3>
+<h6 id='parameters-13'>Parameters</h6>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1505,6 +1567,669 @@ instances | body | true | array | A list of strings that you wish to be recogniz
 <td>true</td>
 <td>string</td>
 <td>entity_id</td>
+</tr>
+</tbody></table>
+<h1 id='platform'>Platform</h1><h2 id='overview'>Overview</h2>
+<p>Cleaning real world data is a painstaking process. Make it easier by using the same tools that 7Park Data uses to deliver insights to hundreds of the leading global financial services companies.
+7Park Data’s Python SDK has the core functionality you need to prepare analytics ready data.</p>
+
+<p>Derive the most value from your data with powerful technology proven to accelerate data initiatives, by increasing capacity for internal engineering and data science teams while reducing costs and operational risk. Our machine learning-powered models outperform comparable solutions with a 4x higher F1 score. Designed for scale and versatility, our Platform processes over 4 TB of transaction and natural language data daily.</p>
+
+<p>7Park Data’s tagging, cleansing and linking solutions can be used as part of a comprehensive data preparation program, or for more targeted projects.</p>
+
+<p>Our solutions transform raw data into analytics-ready information, at scale. Here is how our 3 core modules can help:</p>
+
+<ul>
+<li><code>7Park Tag</code> (Named Entity Recognition): Bring structure and meaning to make unstructured data useful</li>
+<li><code>7Park Cleanse</code> (Named Entity Disambiguation): Reduce noise and dimensionality by resolving entities in data</li>
+<li><code>7Park Link</code> (Named Entity Linking): Connect and enrich by connecting multiple data sets</li>
+</ul>
+
+<p>If you have technical questions please contact Joel at <a href="mailto:joel@7parkdata.com">joel@7parkdata.com</a>.</p>
+
+<p>For product feedback and ideas please reach out to Malte at <a href="mailto:malte@7parkdata.com">malte@7parkdata.com</a>.</p>
+<h2 id='quick-start-guide'>Quick Start Guide</h2>
+<p>1) Set up your credentials and request access.</p>
+
+<ul>
+<li>Visit the <a href="http://account.7parkdata.com/#/akm_key/">Account Management Page</a></li>
+<li>Click <code>Request Credentials</code> in the Authentication section.</li>
+<li>Copy the <code>client_id</code> &amp; <code>client_secret</code>.</li>
+<li>Contact customer success to enable 7Park Platform Modules: <a href="mailto:support@7parkdata.com">support@7parkdata.com</a></li>
+</ul>
+
+<p><br/></p>
+
+<p>2) Install the 7Park Platform SDK from 7Park Data’s pypi server and set your credentials.</p>
+
+<div class="center-column"></div>
+<pre class="highlight python tab-python"><code><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">i</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">pypi</span><span class="o">.</span><span class="mi">7</span><span class="n">parkdata</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">simple</span><span class="o">/</span> <span class="n">parklib</span><span class="o">-</span><span class="n">sdk</span>
+<span class="c"># replace client_id / client_secret with your credentials.</span>
+<span class="n">export</span> <span class="n">PARK_API_CLIENT_ID</span><span class="o">=&lt;</span><span class="n">client_id</span><span class="o">&gt;</span>
+<span class="n">export</span> <span class="n">PARK_API_CLIENT_SECRET</span><span class="o">=&lt;</span><span class="n">client_secret</span><span class="o">&gt;</span>
+</code></pre>
+<p><br/></p>
+
+<p>3) Start coding.</p>
+
+<div class="center-column"></div>
+<pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">parklib.sdk.ner</span> <span class="kn">import</span> <span class="n">NER</span>
+<span class="n">ner_result</span> <span class="o">=</span> <span class="n">NER</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+    <span class="n">source_type</span><span class="o">=</span><span class="s">'news'</span><span class="p">,</span>
+    <span class="n">instances</span><span class="o">=</span><span class="p">[</span><span class="s">"Netflix beats the street."</span><span class="p">,</span><span class="s">"Amazon expands to Austin."</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">ner_result</span><span class="p">)</span>
+</code></pre><h2 id='examples'>Examples</h2>
+<p>Explore common use cases that leverage 7Park Platform SDK to Tag, Link, or Cleanse data.</p>
+<h3 id='enrich-records-in-a-sql-table-with-their-parent-company-s-ticker-symbol'>Enrich records in a SQL table with their parent company’s ticker symbol</h3>
+<p>1) Load your local SQL table into a dataframe using pyodbc or any python db client you prefer</p>
+
+<div class="center-column"></div>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">pyodbc</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="n">conn_str</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s">"DRIVER={PostgreSQL Unicode};"</span>
+    <span class="s">"DATABASE=&lt;database&gt;;"</span>
+    <span class="s">"UID=postgres;"</span>
+    <span class="s">"PWD=&lt;password&gt;;"</span>
+    <span class="s">"SERVER=&lt;server&gt;;"</span>
+    <span class="s">"PORT=5432;"</span>
+    <span class="p">)</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">pyodbc</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">conn_str</span><span class="p">)</span>
+
+<span class="n">SQL_Query</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span>
+<span class="s">'''select
+company_name
+from my_company_database'''</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">SQL_Query</span><span class="p">,</span>
+<span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'name'</span><span class="p">])</span>
+</code></pre>
+<p><br/></p>
+
+<p>2) Use Parklib SDK to enrich each row of the dataframe with its parent company’s ticker symbol</p>
+
+<div class="center-column"></div>
+<pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">parklib.sdk.nel</span> <span class="kn">import</span> <span class="n">NEL</span>
+<span class="kn">from</span> <span class="nn">parklib.sdk.hierarchy</span> <span class="kn">import</span> <span class="n">Hierarchy</span>
+<span class="n">df</span><span class="p">[</span><span class="s">'parent_ticker'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="k">def</span> <span class="nf">append_ticker</span><span class="p">(</span><span class="n">item</span><span class="p">):</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">NEL</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">company_name</span><span class="o">=</span><span class="n">item</span><span class="p">[</span><span class="s">'name'</span><span class="p">])</span>
+     <span class="n">links</span> <span class="o">=</span> <span class="p">[</span><span class="s">'message'</span><span class="p">][</span><span class="s">'links'</span><span class="p">]</span>
+     <span class="k">if</span> <span class="n">links</span><span class="p">:</span> <span class="c"># We found a potential link</span>
+        <span class="n">company_id</span> <span class="o">=</span> <span class="n">links</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s">'company_id'</span><span class="p">]</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="n">Hierarchy</span><span class="o">.</span><span class="n">get_parent_info</span><span class="p">(</span><span class="n">company_id</span><span class="p">)</span>
+        <span class="n">item</span><span class="p">[</span><span class="s">'parent_ticker'</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s">'parent_ticker'</span><span class="p">]</span> <span class="c"># Add parent_ticker</span>
+    <span class="k">return</span> <span class="n">item</span>
+<span class="n">df</span><span class="o">.</span><span class="nb">apply</span><span class="p">(</span><span class="n">append_ticker</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre><h3 id='disambiguate-a-column-of-a-sql-table-and-link-to-a-canonical-company'>Disambiguate a column of a sql table and link to a canonical company</h3>
+<p>1) Load your local SQL table into a dataframe using pyodbc or any python db client you prefer</p>
+
+<div class="center-column"></div>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">pyodbc</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="n">conn_str</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s">"DRIVER={PostgreSQL Unicode};"</span>
+    <span class="s">"DATABASE=&lt;database&gt;;"</span>
+    <span class="s">"UID=postgres;"</span>
+    <span class="s">"PWD=&lt;password&gt;;"</span>
+    <span class="s">"SERVER=&lt;server&gt;;"</span>
+    <span class="s">"PORT=5432;"</span>
+    <span class="p">)</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">pyodbc</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">conn_str</span><span class="p">)</span>
+
+<span class="n">SQL_Query</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span>
+<span class="s">'''select
+company_name
+from my_company_database'''</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">SQL_Query</span><span class="p">,</span>
+<span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'company_names'</span><span class="p">])</span>
+</code></pre>
+<p><br/></p>
+
+<p>2) Upload to AWS S3</p>
+
+<div class="center-column"></div>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">boto3</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s">"data.tsv"</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">"</span><span class="se">\t</span><span class="s">"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>  <span class="c"># temp file can be removed after upload to S3</span>
+<span class="n">s3</span><span class="o">.</span><span class="n">Object</span><span class="p">(</span><span class="n">bucket_name</span><span class="p">,</span> <span class="s">'path/to/file.tsv'</span><span class="p">)</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">Body</span><span class="o">=</span><span class="nb">open</span><span class="p">(</span><span class="s">'data.tsv'</span><span class="p">,</span> <span class="s">'rb'</span><span class="p">))</span>
+</code></pre>
+<p><br/></p>
+
+<p>2) Use 7Park NED engine to disambiguate the data</p>
+
+<div class="center-column"></div>
+<pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">parklib.sdk.ned</span> <span class="kn">import</span> <span class="n">NED</span>
+
+<span class="n">job_id</span> <span class="o">=</span> <span class="n">NED</span><span class="o">.</span><span class="n">run_job_transform</span><span class="p">(</span><span class="n">target_col_index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                       <span class="n">input_path</span><span class="o">=</span><span class="s">"s3://bucket_name/path/to/file.tsv"</span><span class="p">,</span>
+                       <span class="n">output_path</span><span class="o">=</span><span class="s">"s3://bucket_name/path/for/output"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">job_id</span><span class="p">)</span>
+<span class="p">{</span><span class="s">'bulk_id'</span><span class="p">:</span> <span class="s">'bulk-ned-349f81b4-2fb5-451f-825c-65243610ebfc'</span><span class="p">}</span>
+</code></pre>
+<div class="center-column"></div>
+<pre class="highlight python tab-python"><code>
+</code></pre><h2 id='7park-tag'>7Park Tag</h2>
+<p>7Park Tag (Named Entity Recognition)</p>
+
+<p>Create structured datasets from raw inputs</p>
+
+<p>Parse and tag raw, unstructured data to add value to your analytical strategies, and avoid losing precious time trying to make sense of messy files. 7Park Data’s Tag solution brings structure and meaning to your data by identifying and classifying entities in natural language and transaction data, including merchant names, organizations, locations, brands, products, people and more.</p>
+<h3 id='execute'>Execute</h3>
+<p>Run Name entity recognition in real time.</p>
+
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">parklib.sdk.ner</span> <span class="kn">import</span> <span class="n">NER</span>
+
+<span class="n">ner_result</span> <span class="o">=</span> <span class="n">NER</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">source_type</span><span class="o">=</span><span class="s">'news'</span><span class="p">,</span> <span class="n">instances</span><span class="o">=</span><span class="p">[</span><span class="s">"Apple is a company"</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">ner_result</span><span class="p">)</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X POST <span class="se">\</span>
+  https://api.7parkdata.com/ner/annotate <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
+  -d <span class="s1">'{
+       "source_type": "news",
+       "instances": [
+              "Apple is a company."
+       ]
+}'</span>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"doc_index"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"preprocessed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Apple is a company."</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"ner"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"start_pos"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NE_ORG"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Apple"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"end_pos"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h6 id='parameters-14'>Parameters</h6>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>source_type</td>
+<td>true</td>
+<td>string</td>
+<td>Source type to consider. Options include: <code>news</code>, <code>tweets</code>, and <code>credit card</code></td>
+</tr>
+<tr>
+<td>entity_types</td>
+<td>false</td>
+<td>array</td>
+<td>Entity types to consider. Options include: <code>NE_TITLE</code>, <code>NE_PERSON</code>, <code>NE_ORG</code>, <code>NE_PRODUCT</code>, <code>NE_GPE</code>, <code>NE_CURRENCY</code>, <code>NE_MERCHANT</code>, <code>NE_STORE</code>, <code>NE_PAYMENT</code>, and <code>NE_DATE</code>.</td>
+</tr>
+<tr>
+<td>instances</td>
+<td>true</td>
+<td>array</td>
+<td>A list of strings that you wish to be recognized.</td>
+</tr>
+</tbody></table>
+<h3 id='bulk'>Bulk</h3>
+<p>Run NER bulk job transform.</p>
+
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">parklib.sdk.ner</span> <span class="kn">import</span> <span class="n">NER</span>
+
+<span class="n">job_id</span> <span class="o">=</span> <span class="n">NER</span><span class="o">.</span><span class="n">run_job_transform</span><span class="p">(</span><span class="n">source_type</span><span class="o">=</span><span class="s">"news"</span><span class="p">,</span>
+                               <span class="n">entity_types</span><span class="o">=</span><span class="p">[</span><span class="s">"NE_TITLE"</span><span class="p">,</span> <span class="s">"NE_PERSON"</span><span class="p">],</span>
+                               <span class="n">input_path</span><span class="o">=</span><span class="s">"s3://7parkdata/example/example.txt"</span><span class="p">,</span>
+                               <span class="n">output_path</span><span class="o">=</span><span class="s">"s3://7parkdata/example/output"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">job_id</span><span class="p">)</span>
+</code></pre><pre class="highlight shell tab-shell"><code>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"bulk_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bulk-ner-349f81b4-2fb5-451f-825c-65243610ebfa"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h6 id='parameters-15'>Parameters</h6>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>source_type</td>
+<td>true</td>
+<td>string</td>
+<td>Source type to consider. Options include: <code>news</code>, <code>tweets</code>, and <code>credit card</code></td>
+</tr>
+<tr>
+<td>entity_types</td>
+<td>false</td>
+<td>array</td>
+<td>Entity types to consider. Options include: <code>NE_TITLE</code>, <code>NE_PERSON</code>, and <code>NE_ORG</code>.</td>
+</tr>
+<tr>
+<td>input_path</td>
+<td>true</td>
+<td>string</td>
+<td>S3 file path. Example: <code>s3://7p-sdk-examples/bulk_ner_example.jsonl</code> The file should be a <a href="http://jsonlines.org/">jsonlines</a> text file format</td>
+</tr>
+<tr>
+<td>output_path</td>
+<td>true</td>
+<td>string</td>
+<td>S3 folder path. Example: <code>s3://7p-sdk-examples/output</code></td>
+</tr>
+</tbody></table>
+<h3 id='status'>Status</h3>
+<p>Check the status of NER job.</p>
+
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">parklib.sdk.ner</span> <span class="kn">import</span> <span class="n">NER</span>
+
+<span class="n">job_status</span> <span class="o">=</span> <span class="n">NER</span><span class="o">.</span><span class="n">job_transform_status</span><span class="p">(</span><span class="s">'bulk-ner-349f81b4-2fb5-451f-825c-65243610ebfb'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">job_status</span><span class="p">)</span>
+</code></pre><pre class="highlight shell tab-shell"><code>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="err">None</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"output_path"</span><span class="p">:</span><span class="w"> </span><span class="err">None</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"InProgress"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h6 id='parameters-16'>Parameters</h6>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>job_id</td>
+<td>true</td>
+<td>string</td>
+<td>The job id return from run_job_transform</td>
+</tr>
+</tbody></table>
+<h2 id='7park-cleanse'>7Park Cleanse</h2>
+<p>7Park Cleanse (Named Entity Disambiguation)</p>
+
+<p>Reduce noise and create a standard lexicon</p>
+
+<p>Gain clarity into your data by disambiguating text to establish a single semantic reference for better analysis and enrichment. Our Cleanse solution efficiently and accurately creates consistent text from natural language or transaction data, expediting work that would otherwise be sidelined by discrepancies in spelling, entry methods and miscategorization.</p>
+<h3 id='string-distance'>String Distance</h3>
+<p>Run NED - String Distance Model.</p>
+
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">parklib.sdk.ned</span> <span class="kn">import</span> <span class="n">StringDistanceNED</span>
+
+<span class="n">job_id</span> <span class="o">=</span> <span class="n">StringDistanceNED</span><span class="o">.</span><span class="n">run_job_transform</span><span class="p">(</span><span class="n">target_col_index</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                               <span class="n">input_path</span><span class="o">=</span><span class="s">"s3://7parkdata/example/example.txt"</span><span class="p">,</span>
+                               <span class="n">output_path</span><span class="o">=</span><span class="s">"s3://7parkdata/example/output"</span><span class="p">,</span>
+                               <span class="n">threshold</span><span class="o">=</span><span class="mf">0.009</span><span class="p">,</span>
+                               <span class="n">stopwords</span><span class="o">=</span><span class="p">[</span><span class="s">"company"</span><span class="p">,</span> <span class="s">"co"</span><span class="p">,</span> <span class="s">"corp"</span><span class="p">,</span> <span class="s">"llc"</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">job_id</span><span class="p">)</span>
+</code></pre><pre class="highlight shell tab-shell"><code>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"bulk_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bulk-ned-349f81b4-2fb5-451f-825c-65243610ebfc"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h6 id='parameters-17'>Parameters</h6>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>target_col_index</td>
+<td>true</td>
+<td>integer</td>
+<td>Target column index. Start from <code>0</code>. Example: <code>3</code></td>
+</tr>
+<tr>
+<td>input_path</td>
+<td>true</td>
+<td>string</td>
+<td>S3 path for TSV format file. Example: <code>s3://7parkdata/example/example.tsv</code></td>
+</tr>
+<tr>
+<td>output_path</td>
+<td>true</td>
+<td>string</td>
+<td>S3 folder path. Example: <code>s3://7parkdata/example/output</code></td>
+</tr>
+<tr>
+<td>threshold</td>
+<td>true</td>
+<td>float</td>
+<td>Threshold for ned model. default: <code>0.01</code> Example: <code>0.009</code></td>
+</tr>
+<tr>
+<td>stopwords</td>
+<td>true</td>
+<td>list</td>
+<td>Stopwords. Example: <code>[“company”, “co”, “corp”, “llc”]</code></td>
+</tr>
+</tbody></table>
+<h3 id='word-embedding'>Word Embedding</h3>
+<p>Run NED - Word Embedding Model.</p>
+
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">parklib.sdk.ned</span> <span class="kn">import</span> <span class="n">WordEmbeddingNED</span>
+
+<span class="n">job_id</span> <span class="o">=</span> <span class="n">WordEmbeddingNED</span><span class="o">.</span><span class="n">run_job_transform</span><span class="p">(</span><span class="n">target_col_index</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                                            <span class="n">input_path</span><span class="o">=</span><span class="s">"s3://7parkdata/example/example.txt"</span><span class="p">,</span>
+                                            <span class="n">output_path</span><span class="o">=</span><span class="s">"s3://7parkdata/example/output"</span><span class="p">,</span>
+                                            <span class="n">supplemental_col_indexes</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+                                            <span class="n">angular_distance_threshold</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span>
+                                            <span class="n">max_variation_number</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+                                            <span class="n">stopwords</span><span class="o">=</span><span class="p">[</span><span class="s">"company"</span><span class="p">,</span> <span class="s">"co"</span><span class="p">,</span> <span class="s">"corp"</span><span class="p">,</span> <span class="s">"llc"</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">job_id</span><span class="p">)</span>
+</code></pre><pre class="highlight shell tab-shell"><code>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"bulk_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bulk-ned-349f81b4-2fb5-451f-825c-65243610ebfc"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h6 id='parameters-18'>Parameters</h6>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>target_col_index</td>
+<td>true</td>
+<td>integer</td>
+<td>Target column index. Start from <code>0</code>. Example: <code>3</code></td>
+</tr>
+<tr>
+<td>input_path</td>
+<td>true</td>
+<td>string</td>
+<td>S3 path for TSV format file. Example: <code>s3://7parkdata/example/example.tsv</code></td>
+</tr>
+<tr>
+<td>output_path</td>
+<td>true</td>
+<td>string</td>
+<td>S3 folder path. Example: <code>s3://7parkdata/example/output</code></td>
+</tr>
+<tr>
+<td>supplemental_col_indexes</td>
+<td>true</td>
+<td>list</td>
+<td>A list of supplemental column index</td>
+</tr>
+<tr>
+<td>angular_distance_threshold</td>
+<td>true</td>
+<td>float</td>
+<td>Threshold for word embedding ned model. Default: 0.4 Example: <code>0.5</code></td>
+</tr>
+<tr>
+<td>max_variation_number</td>
+<td>true</td>
+<td>float</td>
+<td>Threshold for word embedding ned model. Default: 500. Example: <code>500</code></td>
+</tr>
+<tr>
+<td>stopwords</td>
+<td>true</td>
+<td>list</td>
+<td>Stopwords. Example: <code>[“company”, “co”, “corp”, “llc”]</code></td>
+</tr>
+</tbody></table>
+<h3 id='status-2'>Status</h3>
+<p>Check the status of NED job transform.</p>
+
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">parklib.sdk.ned</span> <span class="kn">import</span> <span class="n">NED</span>
+
+<span class="n">job_status</span> <span class="o">=</span> <span class="n">NED</span><span class="o">.</span><span class="n">job_transform_status</span><span class="p">(</span><span class="s">'bulk-ned-349f81b4-2fb5-451f-825c-65243610ebfc'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">job_status</span><span class="p">)</span>
+</code></pre><pre class="highlight shell tab-shell"><code>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RUNNING"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"output_path"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h6 id='parameters-19'>Parameters</h6>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>job_id</td>
+<td>true</td>
+<td>string</td>
+<td>The job id return from run_job_transform</td>
+</tr>
+</tbody></table>
+<h2 id='7park-link'>7Park Link</h2>
+<p>7Park Link (Named Entity Linking)</p>
+
+<p>Add context by connecting multiple datasets</p>
+
+<p>Expand the utility of your datasets by seamlessly adding descriptive and contextual information from multiple reference sources. 7Park Data’s Link solution creates robust, valuable datasets by joining alternative and fundamental data sets, connecting related entities, organizing by corporate hierarchy and mapping to ticker.</p>
+<h3 id='execute-2'>Execute</h3>
+<p>Run Name entity Linking on real time.</p>
+
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">parklib.sdk.nel</span> <span class="kn">import</span> <span class="n">NEL</span>
+
+<span class="n">nel_result</span> <span class="o">=</span> <span class="n">NEL</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">company_name</span><span class="o">=</span><span class="s">"7park"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">nel_result</span><span class="p">)</span>
+</code></pre><pre class="highlight shell tab-shell"><code>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"Confidence Result in Set"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Top link confidence"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.9</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">378567</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"confidence"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.9</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"factset_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0FM8C2-E"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7Park Data, Inc."</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ticker_region"</span><span class="p">:</span><span class="w"> </span><span class="err">None</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"website"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.7parkdata.com"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1479086</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"confidence"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.06</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"factset_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0C3LPN-E"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Park Vida Group, Inc."</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ticker_region"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PRKV-US"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"website"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.parkvida.com"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"search_args"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7park"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"website"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"top_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7Park Data, Inc."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"top_website"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.7parkdata.com/"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h6 id='parameters-20'>Parameters</h6>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ticker</td>
+<td>true</td>
+<td>string</td>
+<td>Ticker</td>
+</tr>
+<tr>
+<td>company_name</td>
+<td>true</td>
+<td>string</td>
+<td>Company name</td>
+</tr>
+<tr>
+<td>website</td>
+<td>true</td>
+<td>string</td>
+<td>Website</td>
+</tr>
+<tr>
+<td>brand_name</td>
+<td>true</td>
+<td>string</td>
+<td>Brand name</td>
+</tr>
+<tr>
+<td>industries</td>
+<td>true</td>
+<td>list</td>
+<td>Industries</td>
+</tr>
+<tr>
+<td>sectors</td>
+<td>true</td>
+<td>list</td>
+<td>Sectors</td>
+</tr>
+</tbody></table>
+<h3 id='bulk-2'>Bulk</h3>
+<p>Run NEL bulk job transform.</p>
+
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">parklib.sdk.nel</span> <span class="kn">import</span> <span class="n">NEL</span>
+
+<span class="n">job</span> <span class="o">=</span> <span class="n">NEL</span><span class="o">.</span><span class="n">run_job_transform</span><span class="p">(</span><span class="n">input_path</span><span class="o">=</span><span class="s">"s3://7parkdata/example/example.txt"</span><span class="p">,</span>
+                            <span class="n">output_path</span><span class="o">=</span><span class="s">"s3://7parkdata/example/output"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">job</span><span class="p">)</span>
+</code></pre><pre class="highlight shell tab-shell"><code>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"bulk_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bulk-nel-349f81b4-2fb5-451f-825c-65243610ebfa"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h6 id='parameters-21'>Parameters</h6>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>input_path</td>
+<td>true</td>
+<td>string</td>
+<td>S3 file path. Example: <code>s3://7parkdata/example/example.txt</code> The file should be a <a href="http://jsonlines.org/">jsonlines</a> text file format</td>
+</tr>
+<tr>
+<td>output_path</td>
+<td>true</td>
+<td>string</td>
+<td>S3 folder path. Example: <code>s3://7parkdata/example/output</code></td>
+</tr>
+</tbody></table>
+<h3 id='status-3'>Status</h3>
+<p>Check the status of NEL job.</p>
+
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">parklib.sdk.nel</span> <span class="kn">import</span> <span class="n">NEL</span>
+
+<span class="n">job_status</span> <span class="o">=</span> <span class="n">NEL</span><span class="o">.</span><span class="n">job_transform_status</span><span class="p">(</span><span class="s">'bulk-nel-349f81b4-2fb5-451f-825c-65243610ebfb'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">job_status</span><span class="p">)</span>
+</code></pre><pre class="highlight shell tab-shell"><code>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="err">None</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"output_path"</span><span class="p">:</span><span class="w"> </span><span class="err">None</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"InProgress"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h6 id='parameters-22'>Parameters</h6>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>job_id</td>
+<td>true</td>
+<td>string</td>
+<td>bulk_id return from run_job_transform</td>
 </tr>
 </tbody></table>
 
