@@ -2,8 +2,8 @@
 title: 7Park Data API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
-  - shell: cURL
   - python: Python
+  - shell: cURL
 
 toc_footers:
   - <a href='https://account.7parkdata.com/#/akm_key/'>Sign Up for a Developer Key</a>
@@ -1038,6 +1038,7 @@ export PARK_API_CLIENT_SECRET=<client_secret>
 3) Set s3 Bucket Policy (only required for Bulk functions)
 
 * Create private s3 bucket
+* Create a folder `output` in that bucket
 * Navigate to your s3 bucket > permissions > bucket policy
 * Paste in the following json (replace `{BUCKET_NAME}` with your bucket's name):
 
@@ -1049,13 +1050,24 @@ export PARK_API_CLIENT_SECRET=<client_secret>
         {
             "Effect": "Allow",
             "Principal": {
-                "AWS": "arn:aws:iam::084888172679:role/platform-services"
+                "AWS": [
+                    "arn:aws:iam::084888172679:role/platform-services",
+                    "arn:aws:iam::084888172679:role/platform-services-lambda"
+                ]
             },
-            "Action": [
-                "s3:GetObject",
-                "s3:PutObject"
-            ],
+            "Action": "s3:*",
             "Resource": "arn:aws:s3:::{BUCKET_NAME}/*"
+        },
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": [
+                    "arn:aws:iam::084888172679:role/platform-services",
+                    "arn:aws:iam::084888172679:role/platform-services-lambda"
+                ]
+            },
+            "Action": "s3:*",
+            "Resource": "arn:aws:s3:::{BUCKET_NAME}"
         }
     ]
 }
@@ -1082,30 +1094,25 @@ Explore common use cases that leverage 7Park Platform SDK to Tag, Link, or Clean
 
 ### Enrich records in a SQL table with their parent company’s ticker symbol
 
-1) Load your local SQL table into a dataframe using pyodbc or any python db client you prefer
+1) Load your local SQL table into a dataframe using psycopg2 or any python db client you prefer
 
 <div class="center-column"></div>
 ```python
-import pyodbc
 import pandas as pd
+import pandas.io.sql as sqlio
+import psycopg2
 conn_str = (
-    "DRIVER={PostgreSQL Unicode};"
-    "DATABASE=<database>;"
-    "UID=postgres;"
-    "PWD=<password>;"
-    "SERVER=<server>;"
-    "PORT=5432;"
-    )
-
-conn = pyodbc.connect(conn_str)
-
-SQL_Query = pd.read_sql_query(
-'''select
-company_name
-from my_company_database''', conn)
-
-df = pd.DataFrame(SQL_Query,
-columns=['name'])
+            "dbname=<database> "
+            "user=<username> "
+            "password=<password> "
+            "host=<url> "
+            "port=<port> "  )
+conn = psycopg2.connect(conn_str)
+SQL = '''select company_name as name from dimensions.dim_company
+        where  ticker NOT IN ('N/A')
+        LIMIT 100'''
+df = sqlio.read_sql_query(SQL,conn)
+print(df.head())
 ```
 
 <br/>
@@ -1118,9 +1125,10 @@ from parklib.sdk.nel import NEL
 from parklib.sdk.hierarchy import Hierarchy
 df['parent_ticker'] = None
 def append_ticker(item):
+    print(item['name'])
     resp = NEL.execute(company_name=item['name'])
-     links = ['message']['links']
-     if links: # We found a potential link
+    links = resp['message']['links']
+    if links: # We found a potential link
         company_id = links[0]['company_id']
         resp = Hierarchy.get_parent_info(company_id)
         item['parent_ticker'] = resp['parent_ticker'] # Add parent_ticker
@@ -1131,56 +1139,43 @@ df.apply(append_ticker,axis=1)
 
 ### Disambiguate a column of a sql table and link to a canonical company
 
-1) Load your local SQL table into a dataframe using pyodbc or any python db client you prefer
+1) Load your local SQL table into a dataframe using psycopg2 or any python db client you prefer
 
 <div class="center-column"></div>
 ```python
-import pyodbc
 import pandas as pd
+import pandas.io.sql as sqlio
+import psycopg2
 conn_str = (
-    "DRIVER={PostgreSQL Unicode};"
-    "DATABASE=<database>;"
-    "UID=postgres;"
-    "PWD=<password>;"
-    "SERVER=<server>;"
-    "PORT=5432;"
-    )
-
-conn = pyodbc.connect(conn_str)
-
-SQL_Query = pd.read_sql_query(
-'''select
-company_name
-from my_company_database''', conn)
-
-df = pd.DataFrame(SQL_Query,
-columns=['company_names'])
+            "dbname=<database> "
+            "user=<username> "
+            "password=<password> "
+            "host=<url> "
+            "port=<port> "  )
+conn = psycopg2.connect(conn_str)
+SQL = '''select company_name as name from dimensions.dim_company
+        where  ticker NOT IN ('N/A')
+        LIMIT 100'''
+df = sqlio.read_sql_query(SQL,conn)
+print(df.head())
 ```
 
-<br/>
-
-2) Upload to AWS S3
-
-<div class="center-column"></div>
-```python
-import boto3
-
-df.to_csv("data.tsv", sep="\t", index=False)  # temp file can be removed after upload to S3
-s3.Object(bucket_name, 'path/to/file.tsv').put(Body=open('data.tsv', 'rb'))
-```
 <br/>
 
 2) Use 7Park NED engine to disambiguate the data
 
 <div class="center-column"></div>
 ```python
-from parklib.sdk.ned import NED
+import boto3
+bucket_name = '7p-temp'
+s3 = boto3.resource('s3')
+df.to_csv("data.tsv", sep="\t", index=False)  # temp file can be removed after upload to S3
+s3.Object(bucket_name, 'test.tsv').put(Body=open('data.tsv', 'rb'))
 
+from parklib.sdk.ned import NED
 job_id = NED.run_job_transform(target_col_index=0,
-                       input_path="s3://bucket_name/path/to/file.tsv",
-                       output_path="s3://bucket_name/path/for/output")
-print(job_id)
-{'bulk_id': 'bulk-ned-349f81b4-2fb5-451f-825c-65243610ebfc'}
+                       input_path="s3://7p-temp/test.tsv",
+                       output_path="s3://7p-temp/output")
 ```
 
 <div class="center-column"></div>
@@ -1262,8 +1257,8 @@ from parklib.sdk.ner import NER
 
 job_id = NER.run_job_transform(source_type="news",
                                entity_types=["NE_TITLE", "NE_PERSON"],
-                               input_path="s3://7parkdata/example/example.txt",
-                               output_path="s3://7parkdata/example/output")
+                               input_path="s3://7parkdata/example.jsonl",
+                               output_path="s3://7parkdata/output")
 print(job_id)
 ```
 
@@ -1284,8 +1279,8 @@ print(job_id)
 Parameter | Required | Type | Description
 --------- | -------- | ----------- | -----------
 source_type | true | string | Source type to consider. Options include: `news`, `tweets`, and `credit card`
-entity_types | false | array | Entity types to consider. Options include: `NE_TITLE`, `NE_PERSON`, and `NE_ORG`.
-input_path | true | string | S3 file path. Example: `s3://7p-sdk-examples/bulk_ner_example.jsonl` The file should be a [jsonlines](http://jsonlines.org/) text file format
+entity_types | false | array | Entity types to consider. Options include: `NE_TITLE`, `NE_PERSON`, `NE_ORG`, `NE_PRODUCT`, `NE_GPE`, `NE_CURRENCY`, `NE_MERCHANT`, `NE_STORE`, `NE_PAYMENT`, and `NE_DATE`.
+input_path | true | string | S3 file path. Example: [`s3://7p-sdk-examples/bulk_ner_example.jsonl`](https://7p-sdk-examples.s3.amazonaws.com/bulk_ner_example.jsonl) The file should be a [jsonlines](http://jsonlines.org/) text file format
 output_path | true | string | S3 folder path. Example: `s3://7p-sdk-examples/output`
 
 
@@ -1335,6 +1330,7 @@ Reduce noise and create a standard lexicon
 
 Gain clarity into your data by disambiguating text to establish a single semantic reference for better analysis and enrichment. Our Cleanse solution efficiently and accurately creates consistent text from natural language or transaction data, expediting work that would otherwise be sidelined by discrepancies in spelling, entry methods and miscategorization.
 
+#### **Make sure the input file is in a tsv(tab separated value) format**
 ### String Distance
 
 Run NED - String Distance Model.
@@ -1345,8 +1341,8 @@ Run NED - String Distance Model.
 from parklib.sdk.ned import StringDistanceNED
 
 job_id = StringDistanceNED.run_job_transform(target_col_index=3,
-                               input_path="s3://7parkdata/example/example.txt",
-                               output_path="s3://7parkdata/example/output",
+                               input_path="s3://7parkdata/example.tsv",
+                               output_path="s3://7parkdata/output",
                                threshold=0.009,
                                stopwords=["company", "co", "corp", "llc"])
 print(job_id)
@@ -1368,11 +1364,11 @@ print(job_id)
 
 Parameter | Required | Type | Description
 --------- | -------- | ----------- | -----------
-target_col_index | true | integer | Target column index. Start from `0`. Example: `3`
-input_path | true | string | S3 path for TSV format file. Example: `s3://7parkdata/example/example.tsv`
-output_path | true | string | S3 folder path. Example: `s3://7parkdata/example/output`
+target_col_index | true | integer | Target column index. `0` Based. Example: `3`
+input_path | true | string | S3 file path. Example: [`s3://7p-sdk-examples/bulk_ned_example.tsv`](https://7p-sdk-examples.s3.amazonaws.com/bulk_ned_example.tsv) The file should be a `tab separated value` file
+output_path | true | string | S3 folder path. Example: `s3://7p-sdk-examples/output`
 threshold | true | float | Threshold for ned model. default: `0.01` Example: `0.009`
-stopwords | true | list | Stopwords. Example: `[“company”, “co”, “corp”, “llc”]`
+stopwords | true | list | Stopwords to ignore. Example: `[“company”, “co”, “corp”, “llc”]`
 
 ### Word Embedding
 
@@ -1384,8 +1380,8 @@ Run NED - Word Embedding Model.
 from parklib.sdk.ned import WordEmbeddingNED
 
 job_id = WordEmbeddingNED.run_job_transform(target_col_index=3,
-                                            input_path="s3://7parkdata/example/example.txt",
-                                            output_path="s3://7parkdata/example/output",
+                                            input_path="s3://7parkdata/example.jsonl",
+                                            output_path="s3://7parkdata/output",
                                             supplemental_col_indexes=[2, 3, 4],
                                             angular_distance_threshold=0.4,
                                             max_variation_number=500,
@@ -1409,12 +1405,12 @@ print(job_id)
 
 Parameter | Required | Type | Description
 --------- | -------- | ----------- | -----------
-target_col_index | true | integer | Target column index. Start from `0`. Example: `3`
-input_path | true | string | S3 path for TSV format file. Example: `s3://7parkdata/example/example.tsv`
-output_path | true | string | S3 folder path. Example: `s3://7parkdata/example/output`
-supplemental_col_indexes | true | list | A list of supplemental column index
-angular_distance_threshold | true | float | Threshold for word embedding ned model. Default: 0.4 Example: `0.5`
-max_variation_number | true | float | Threshold for word embedding ned model. Default: 500. Example: `500`
+target_col_index | true | integer | Target column index. `0` Based. Example: `3`
+input_path | true | string | S3 file path. Example: [`s3://7p-sdk-examples/bulk_ned_example.tsv`](https://7p-sdk-examples.s3.amazonaws.com/bulk_ned_example.tsv) The file should be a `tab separated value` file
+output_path | true | string | S3 folder path. Example: `s3://7p-sdk-examples/output`
+supplemental_col_indexes | true | list | `0` Based. A list of columns containing relevant contextual information
+angular_distance_threshold | true | float | Max distance in radians between two words that should be disambiguated. A small angular distance between words means the word embedding considers the words synonomous. Default: 0.4 Example: `0.5`
+max_variation_number | true | int | Maximum number of elements included in one canonical item description. Default: 500. Example: `500`
 stopwords | true | list | Stopwords. Example: `[“company”, “co”, “corp”, “llc”]`
 
 ### Status
@@ -1533,8 +1529,8 @@ Run NEL bulk job transform.
 ```python
 from parklib.sdk.nel import NEL
 
-job = NEL.run_job_transform(input_path="s3://7parkdata/example/example.txt",
-                            output_path="s3://7parkdata/example/output")
+job = NEL.run_job_transform(input_path="s3://7parkdata/example.jsonl",
+                            output_path="s3://7parkdata/output")
 print(job)
 ```
 
@@ -1554,8 +1550,8 @@ print(job)
 
 Parameter | Required | Type | Description
 --------- | -------- | ----------- | -----------
-input_path | true | string | S3 file path. Example: `s3://7parkdata/example/example.txt` The file should be a [jsonlines](http://jsonlines.org/) text file format
-output_path | true | string | S3 folder path. Example: `s3://7parkdata/example/output`
+input_path | true | string | S3 file path. Example: [`s3://7p-sdk-examples/bulk_nel_example.jsonl`](https://7p-sdk-examples.s3.amazonaws.com/bulk_nel_example.jsonl) The file should be a [jsonlines](http://jsonlines.org/) text file format
+output_path | true | string | S3 folder path. Example: `s3://7p-sdk-examples/output`
 
 
 

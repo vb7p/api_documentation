@@ -201,7 +201,7 @@
       <script src="javascripts/all_nosearch.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;python&quot;]">
+  <body class="index" data-languages="[&quot;python&quot;,&quot;shell&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -211,8 +211,8 @@
     <div class="toc-wrapper">
       <img src="images/7p_logo.png" class="logo" alt="7p logo" />
         <div class="lang-selector">
-              <a href="#" data-language-name="shell">cURL</a>
               <a href="#" data-language-name="python">Python</a>
+              <a href="#" data-language-name="shell">cURL</a>
         </div>
       <ul id="toc" class="toc-list-h1">
           <li>
@@ -348,6 +348,9 @@
                     <a href="#7park-cleanse" class="toc-h2 toc-link" data-title="7Park Cleanse">7Park Cleanse</a>
                       <ul class="toc-list-h3">
                           <li>
+                            <a href="#make-sure-the-input-file-is-in-a-tsv-tab-separated-value-format" class="toc-h3 toc-link" data-title="<strong>Make sure the input file is in a tsv(tab separated value) format</strong>"><strong>Make sure the input file is in a tsv(tab separated value) format</strong></a>
+                          </li>
+                          <li>
                             <a href="#string-distance" class="toc-h3 toc-link" data-title="String Distance">String Distance</a>
                           </li>
                           <li>
@@ -459,7 +462,7 @@ The access token expires every 24 hours. After which, you must get a new one to 
 <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/permissions"</span>
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span> <span class="p">:</span> <span class="s">"Bearer "</span><span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span> <span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="n">querystring</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
@@ -575,7 +578,7 @@ The access token expires every 24 hours. After which, you must get a new one to 
 
 <span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/companies"</span>
 <span class="n">querystring</span> <span class="o">=</span> <span class="p">{</span><span class="s">"search"</span> <span class="p">:</span> <span class="s">"netflix"</span><span class="p">}</span>
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span> <span class="p">:</span> <span class="s">"Bearer "</span><span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span> <span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="n">querystring</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
@@ -1610,7 +1613,47 @@ The access token expires every 24 hours. After which, you must get a new one to 
 </code></pre>
 <p><br/></p>
 
-<p>3) Start coding.</p>
+<p>3) Set s3 Bucket Policy (only required for Bulk functions)</p>
+
+<ul>
+<li>Create private s3 bucket</li>
+<li>Create a folder <code>output</code> in that bucket</li>
+<li>Navigate to your s3 bucket &gt; permissions &gt; bucket policy</li>
+<li>Paste in the following json (replace <code>{BUCKET_NAME}</code> with your bucket&#39;s name):</li>
+</ul>
+
+<div class="center-column"></div>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-10-17"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Statement"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Effect"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Allow"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Principal"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"AWS"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"arn:aws:iam::084888172679:role/platform-services"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"arn:aws:iam::084888172679:role/platform-services-lambda"</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"Action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"s3:*"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Resource"</span><span class="p">:</span><span class="w"> </span><span class="s2">"arn:aws:s3:::{BUCKET_NAME}/*"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"Effect"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Allow"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Principal"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"AWS"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"arn:aws:iam::084888172679:role/platform-services"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"arn:aws:iam::084888172679:role/platform-services-lambda"</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"Action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"s3:*"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"Resource"</span><span class="p">:</span><span class="w"> </span><span class="s2">"arn:aws:s3:::{BUCKET_NAME}"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><br/></p>
+
+<p>4) Start coding.</p>
 
 <div class="center-column"></div>
 <pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">parklib.sdk.ner</span> <span class="kn">import</span> <span class="n">NER</span>
@@ -1622,29 +1665,24 @@ The access token expires every 24 hours. After which, you must get a new one to 
 </code></pre><h2 id='examples'>Examples</h2>
 <p>Explore common use cases that leverage 7Park Platform SDK to Tag, Link, or Cleanse data.</p>
 <h3 id='enrich-records-in-a-sql-table-with-their-parent-company-s-ticker-symbol'>Enrich records in a SQL table with their parent company’s ticker symbol</h3>
-<p>1) Load your local SQL table into a dataframe using pyodbc or any python db client you prefer</p>
+<p>1) Load your local SQL table into a dataframe using psycopg2 or any python db client you prefer</p>
 
 <div class="center-column"></div>
-<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">pyodbc</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">pandas.io.sql</span> <span class="k">as</span> <span class="n">sqlio</span>
+<span class="kn">import</span> <span class="nn">psycopg2</span>
 <span class="n">conn_str</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="s">"DRIVER={PostgreSQL Unicode};"</span>
-    <span class="s">"DATABASE=&lt;database&gt;;"</span>
-    <span class="s">"UID=postgres;"</span>
-    <span class="s">"PWD=&lt;password&gt;;"</span>
-    <span class="s">"SERVER=&lt;server&gt;;"</span>
-    <span class="s">"PORT=5432;"</span>
-    <span class="p">)</span>
-
-<span class="n">conn</span> <span class="o">=</span> <span class="n">pyodbc</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">conn_str</span><span class="p">)</span>
-
-<span class="n">SQL_Query</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span>
-<span class="s">'''select
-company_name
-from my_company_database'''</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
-
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">SQL_Query</span><span class="p">,</span>
-<span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'name'</span><span class="p">])</span>
+            <span class="s">"dbname=&lt;database&gt; "</span>
+            <span class="s">"user=&lt;username&gt; "</span>
+            <span class="s">"password=&lt;password&gt; "</span>
+            <span class="s">"host=&lt;url&gt; "</span>
+            <span class="s">"port=&lt;port&gt; "</span>  <span class="p">)</span>
+<span class="n">conn</span> <span class="o">=</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">conn_str</span><span class="p">)</span>
+<span class="n">SQL</span> <span class="o">=</span> <span class="s">'''select company_name as name from dimensions.dim_company
+        where  ticker NOT IN ('N/A')
+        LIMIT 100'''</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">sqlio</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="n">SQL</span><span class="p">,</span><span class="n">conn</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </code></pre>
 <p><br/></p>
 
@@ -1655,61 +1693,50 @@ from my_company_database'''</span><span class="p">,</span> <span class="n">conn<
 <span class="kn">from</span> <span class="nn">parklib.sdk.hierarchy</span> <span class="kn">import</span> <span class="n">Hierarchy</span>
 <span class="n">df</span><span class="p">[</span><span class="s">'parent_ticker'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
 <span class="k">def</span> <span class="nf">append_ticker</span><span class="p">(</span><span class="n">item</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s">'name'</span><span class="p">])</span>
     <span class="n">resp</span> <span class="o">=</span> <span class="n">NEL</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">company_name</span><span class="o">=</span><span class="n">item</span><span class="p">[</span><span class="s">'name'</span><span class="p">])</span>
-     <span class="n">links</span> <span class="o">=</span> <span class="p">[</span><span class="s">'message'</span><span class="p">][</span><span class="s">'links'</span><span class="p">]</span>
-     <span class="k">if</span> <span class="n">links</span><span class="p">:</span> <span class="c"># We found a potential link</span>
+    <span class="n">links</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s">'message'</span><span class="p">][</span><span class="s">'links'</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">links</span><span class="p">:</span> <span class="c"># We found a potential link</span>
         <span class="n">company_id</span> <span class="o">=</span> <span class="n">links</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s">'company_id'</span><span class="p">]</span>
         <span class="n">resp</span> <span class="o">=</span> <span class="n">Hierarchy</span><span class="o">.</span><span class="n">get_parent_info</span><span class="p">(</span><span class="n">company_id</span><span class="p">)</span>
         <span class="n">item</span><span class="p">[</span><span class="s">'parent_ticker'</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s">'parent_ticker'</span><span class="p">]</span> <span class="c"># Add parent_ticker</span>
     <span class="k">return</span> <span class="n">item</span>
 <span class="n">df</span><span class="o">.</span><span class="nb">apply</span><span class="p">(</span><span class="n">append_ticker</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </code></pre><h3 id='disambiguate-a-column-of-a-sql-table-and-link-to-a-canonical-company'>Disambiguate a column of a sql table and link to a canonical company</h3>
-<p>1) Load your local SQL table into a dataframe using pyodbc or any python db client you prefer</p>
+<p>1) Load your local SQL table into a dataframe using psycopg2 or any python db client you prefer</p>
 
 <div class="center-column"></div>
-<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">pyodbc</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">pandas.io.sql</span> <span class="k">as</span> <span class="n">sqlio</span>
+<span class="kn">import</span> <span class="nn">psycopg2</span>
 <span class="n">conn_str</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="s">"DRIVER={PostgreSQL Unicode};"</span>
-    <span class="s">"DATABASE=&lt;database&gt;;"</span>
-    <span class="s">"UID=postgres;"</span>
-    <span class="s">"PWD=&lt;password&gt;;"</span>
-    <span class="s">"SERVER=&lt;server&gt;;"</span>
-    <span class="s">"PORT=5432;"</span>
-    <span class="p">)</span>
-
-<span class="n">conn</span> <span class="o">=</span> <span class="n">pyodbc</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">conn_str</span><span class="p">)</span>
-
-<span class="n">SQL_Query</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span>
-<span class="s">'''select
-company_name
-from my_company_database'''</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
-
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">SQL_Query</span><span class="p">,</span>
-<span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'company_names'</span><span class="p">])</span>
-</code></pre>
-<p><br/></p>
-
-<p>2) Upload to AWS S3</p>
-
-<div class="center-column"></div>
-<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">boto3</span>
-
-<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s">"data.tsv"</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">"</span><span class="se">\t</span><span class="s">"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>  <span class="c"># temp file can be removed after upload to S3</span>
-<span class="n">s3</span><span class="o">.</span><span class="n">Object</span><span class="p">(</span><span class="n">bucket_name</span><span class="p">,</span> <span class="s">'path/to/file.tsv'</span><span class="p">)</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">Body</span><span class="o">=</span><span class="nb">open</span><span class="p">(</span><span class="s">'data.tsv'</span><span class="p">,</span> <span class="s">'rb'</span><span class="p">))</span>
+            <span class="s">"dbname=&lt;database&gt; "</span>
+            <span class="s">"user=&lt;username&gt; "</span>
+            <span class="s">"password=&lt;password&gt; "</span>
+            <span class="s">"host=&lt;url&gt; "</span>
+            <span class="s">"port=&lt;port&gt; "</span>  <span class="p">)</span>
+<span class="n">conn</span> <span class="o">=</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">conn_str</span><span class="p">)</span>
+<span class="n">SQL</span> <span class="o">=</span> <span class="s">'''select company_name as name from dimensions.dim_company
+        where  ticker NOT IN ('N/A')
+        LIMIT 100'''</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">sqlio</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="n">SQL</span><span class="p">,</span><span class="n">conn</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </code></pre>
 <p><br/></p>
 
 <p>2) Use 7Park NED engine to disambiguate the data</p>
 
 <div class="center-column"></div>
-<pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">parklib.sdk.ned</span> <span class="kn">import</span> <span class="n">NED</span>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">boto3</span>
+<span class="n">bucket_name</span> <span class="o">=</span> <span class="s">'7p-temp'</span>
+<span class="n">s3</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s">'s3'</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s">"data.tsv"</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">"</span><span class="se">\t</span><span class="s">"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>  <span class="c"># temp file can be removed after upload to S3</span>
+<span class="n">s3</span><span class="o">.</span><span class="n">Object</span><span class="p">(</span><span class="n">bucket_name</span><span class="p">,</span> <span class="s">'test.tsv'</span><span class="p">)</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">Body</span><span class="o">=</span><span class="nb">open</span><span class="p">(</span><span class="s">'data.tsv'</span><span class="p">,</span> <span class="s">'rb'</span><span class="p">))</span>
 
+<span class="kn">from</span> <span class="nn">parklib.sdk.ned</span> <span class="kn">import</span> <span class="n">NED</span>
 <span class="n">job_id</span> <span class="o">=</span> <span class="n">NED</span><span class="o">.</span><span class="n">run_job_transform</span><span class="p">(</span><span class="n">target_col_index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-                       <span class="n">input_path</span><span class="o">=</span><span class="s">"s3://bucket_name/path/to/file.tsv"</span><span class="p">,</span>
-                       <span class="n">output_path</span><span class="o">=</span><span class="s">"s3://bucket_name/path/for/output"</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">job_id</span><span class="p">)</span>
-<span class="p">{</span><span class="s">'bulk_id'</span><span class="p">:</span> <span class="s">'bulk-ned-349f81b4-2fb5-451f-825c-65243610ebfc'</span><span class="p">}</span>
+                       <span class="n">input_path</span><span class="o">=</span><span class="s">"s3://7p-temp/test.tsv"</span><span class="p">,</span>
+                       <span class="n">output_path</span><span class="o">=</span><span class="s">"s3://7p-temp/output"</span><span class="p">)</span>
 </code></pre>
 <div class="center-column"></div>
 <pre class="highlight python tab-python"><code>
@@ -1796,8 +1823,8 @@ from my_company_database'''</span><span class="p">,</span> <span class="n">conn<
 
 <span class="n">job_id</span> <span class="o">=</span> <span class="n">NER</span><span class="o">.</span><span class="n">run_job_transform</span><span class="p">(</span><span class="n">source_type</span><span class="o">=</span><span class="s">"news"</span><span class="p">,</span>
                                <span class="n">entity_types</span><span class="o">=</span><span class="p">[</span><span class="s">"NE_TITLE"</span><span class="p">,</span> <span class="s">"NE_PERSON"</span><span class="p">],</span>
-                               <span class="n">input_path</span><span class="o">=</span><span class="s">"s3://7parkdata/example/example.txt"</span><span class="p">,</span>
-                               <span class="n">output_path</span><span class="o">=</span><span class="s">"s3://7parkdata/example/output"</span><span class="p">)</span>
+                               <span class="n">input_path</span><span class="o">=</span><span class="s">"s3://7parkdata/example.jsonl"</span><span class="p">,</span>
+                               <span class="n">output_path</span><span class="o">=</span><span class="s">"s3://7parkdata/output"</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">job_id</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code>
 </code></pre>
@@ -1826,13 +1853,13 @@ from my_company_database'''</span><span class="p">,</span> <span class="n">conn<
 <td>entity_types</td>
 <td>false</td>
 <td>array</td>
-<td>Entity types to consider. Options include: <code>NE_TITLE</code>, <code>NE_PERSON</code>, and <code>NE_ORG</code>.</td>
+<td>Entity types to consider. Options include: <code>NE_TITLE</code>, <code>NE_PERSON</code>, <code>NE_ORG</code>, <code>NE_PRODUCT</code>, <code>NE_GPE</code>, <code>NE_CURRENCY</code>, <code>NE_MERCHANT</code>, <code>NE_STORE</code>, <code>NE_PAYMENT</code>, and <code>NE_DATE</code>.</td>
 </tr>
 <tr>
 <td>input_path</td>
 <td>true</td>
 <td>string</td>
-<td>S3 file path. Example: <code>s3://7p-sdk-examples/bulk_ner_example.jsonl</code> The file should be a <a href="http://jsonlines.org/">jsonlines</a> text file format</td>
+<td>S3 file path. Example: <a href="https://7p-sdk-examples.s3.amazonaws.com/bulk_ner_example.jsonl"><code>s3://7p-sdk-examples/bulk_ner_example.jsonl</code></a> The file should be a <a href="http://jsonlines.org/">jsonlines</a> text file format</td>
 </tr>
 <tr>
 <td>output_path</td>
@@ -1883,7 +1910,7 @@ from my_company_database'''</span><span class="p">,</span> <span class="n">conn<
 <p>Reduce noise and create a standard lexicon</p>
 
 <p>Gain clarity into your data by disambiguating text to establish a single semantic reference for better analysis and enrichment. Our Cleanse solution efficiently and accurately creates consistent text from natural language or transaction data, expediting work that would otherwise be sidelined by discrepancies in spelling, entry methods and miscategorization.</p>
-<h3 id='string-distance'>String Distance</h3>
+<h4 id='make-sure-the-input-file-is-in-a-tsv-tab-separated-value-format'><strong>Make sure the input file is in a tsv(tab separated value) format</strong></h4><h3 id='string-distance'>String Distance</h3>
 <p>Run NED - String Distance Model.</p>
 
 <blockquote>
@@ -1892,8 +1919,8 @@ from my_company_database'''</span><span class="p">,</span> <span class="n">conn<
 <pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">parklib.sdk.ned</span> <span class="kn">import</span> <span class="n">StringDistanceNED</span>
 
 <span class="n">job_id</span> <span class="o">=</span> <span class="n">StringDistanceNED</span><span class="o">.</span><span class="n">run_job_transform</span><span class="p">(</span><span class="n">target_col_index</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-                               <span class="n">input_path</span><span class="o">=</span><span class="s">"s3://7parkdata/example/example.txt"</span><span class="p">,</span>
-                               <span class="n">output_path</span><span class="o">=</span><span class="s">"s3://7parkdata/example/output"</span><span class="p">,</span>
+                               <span class="n">input_path</span><span class="o">=</span><span class="s">"s3://7parkdata/example.tsv"</span><span class="p">,</span>
+                               <span class="n">output_path</span><span class="o">=</span><span class="s">"s3://7parkdata/output"</span><span class="p">,</span>
                                <span class="n">threshold</span><span class="o">=</span><span class="mf">0.009</span><span class="p">,</span>
                                <span class="n">stopwords</span><span class="o">=</span><span class="p">[</span><span class="s">"company"</span><span class="p">,</span> <span class="s">"co"</span><span class="p">,</span> <span class="s">"corp"</span><span class="p">,</span> <span class="s">"llc"</span><span class="p">])</span>
 <span class="k">print</span><span class="p">(</span><span class="n">job_id</span><span class="p">)</span>
@@ -1918,19 +1945,19 @@ from my_company_database'''</span><span class="p">,</span> <span class="n">conn<
 <td>target_col_index</td>
 <td>true</td>
 <td>integer</td>
-<td>Target column index. Start from <code>0</code>. Example: <code>3</code></td>
+<td>Target column index. <code>0</code> Based. Example: <code>3</code></td>
 </tr>
 <tr>
 <td>input_path</td>
 <td>true</td>
 <td>string</td>
-<td>S3 path for TSV format file. Example: <code>s3://7parkdata/example/example.tsv</code></td>
+<td>S3 file path. Example: <a href="https://7p-sdk-examples.s3.amazonaws.com/bulk_ned_example.tsv"><code>s3://7p-sdk-examples/bulk_ned_example.tsv</code></a> The file should be a <code>tab separated value</code> file</td>
 </tr>
 <tr>
 <td>output_path</td>
 <td>true</td>
 <td>string</td>
-<td>S3 folder path. Example: <code>s3://7parkdata/example/output</code></td>
+<td>S3 folder path. Example: <code>s3://7p-sdk-examples/output</code></td>
 </tr>
 <tr>
 <td>threshold</td>
@@ -1942,7 +1969,7 @@ from my_company_database'''</span><span class="p">,</span> <span class="n">conn<
 <td>stopwords</td>
 <td>true</td>
 <td>list</td>
-<td>Stopwords. Example: <code>[“company”, “co”, “corp”, “llc”]</code></td>
+<td>Stopwords to ignore. Example: <code>[“company”, “co”, “corp”, “llc”]</code></td>
 </tr>
 </tbody></table>
 <h3 id='word-embedding'>Word Embedding</h3>
@@ -1954,8 +1981,8 @@ from my_company_database'''</span><span class="p">,</span> <span class="n">conn<
 <pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">parklib.sdk.ned</span> <span class="kn">import</span> <span class="n">WordEmbeddingNED</span>
 
 <span class="n">job_id</span> <span class="o">=</span> <span class="n">WordEmbeddingNED</span><span class="o">.</span><span class="n">run_job_transform</span><span class="p">(</span><span class="n">target_col_index</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-                                            <span class="n">input_path</span><span class="o">=</span><span class="s">"s3://7parkdata/example/example.txt"</span><span class="p">,</span>
-                                            <span class="n">output_path</span><span class="o">=</span><span class="s">"s3://7parkdata/example/output"</span><span class="p">,</span>
+                                            <span class="n">input_path</span><span class="o">=</span><span class="s">"s3://7parkdata/example.jsonl"</span><span class="p">,</span>
+                                            <span class="n">output_path</span><span class="o">=</span><span class="s">"s3://7parkdata/output"</span><span class="p">,</span>
                                             <span class="n">supplemental_col_indexes</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
                                             <span class="n">angular_distance_threshold</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span>
                                             <span class="n">max_variation_number</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
@@ -1982,37 +2009,37 @@ from my_company_database'''</span><span class="p">,</span> <span class="n">conn<
 <td>target_col_index</td>
 <td>true</td>
 <td>integer</td>
-<td>Target column index. Start from <code>0</code>. Example: <code>3</code></td>
+<td>Target column index. <code>0</code> Based. Example: <code>3</code></td>
 </tr>
 <tr>
 <td>input_path</td>
 <td>true</td>
 <td>string</td>
-<td>S3 path for TSV format file. Example: <code>s3://7parkdata/example/example.tsv</code></td>
+<td>S3 file path. Example: <a href="https://7p-sdk-examples.s3.amazonaws.com/bulk_ned_example.tsv"><code>s3://7p-sdk-examples/bulk_ned_example.tsv</code></a> The file should be a <code>tab separated value</code> file</td>
 </tr>
 <tr>
 <td>output_path</td>
 <td>true</td>
 <td>string</td>
-<td>S3 folder path. Example: <code>s3://7parkdata/example/output</code></td>
+<td>S3 folder path. Example: <code>s3://7p-sdk-examples/output</code></td>
 </tr>
 <tr>
 <td>supplemental_col_indexes</td>
 <td>true</td>
 <td>list</td>
-<td>A list of supplemental column index</td>
+<td><code>0</code> Based. A list of columns containing relevant contextual information</td>
 </tr>
 <tr>
 <td>angular_distance_threshold</td>
 <td>true</td>
 <td>float</td>
-<td>Threshold for word embedding ned model. Default: 0.4 Example: <code>0.5</code></td>
+<td>Max distance in radians between two words that should be disambiguated. A small angular distance between words means the word embedding considers the words synonomous. Default: 0.4 Example: <code>0.5</code></td>
 </tr>
 <tr>
 <td>max_variation_number</td>
 <td>true</td>
-<td>float</td>
-<td>Threshold for word embedding ned model. Default: 500. Example: <code>500</code></td>
+<td>int</td>
+<td>Maximum number of elements included in one canonical item description. Default: 500. Example: <code>500</code></td>
 </tr>
 <tr>
 <td>stopwords</td>
@@ -2163,8 +2190,8 @@ from my_company_database'''</span><span class="p">,</span> <span class="n">conn<
 </blockquote>
 <pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">parklib.sdk.nel</span> <span class="kn">import</span> <span class="n">NEL</span>
 
-<span class="n">job</span> <span class="o">=</span> <span class="n">NEL</span><span class="o">.</span><span class="n">run_job_transform</span><span class="p">(</span><span class="n">input_path</span><span class="o">=</span><span class="s">"s3://7parkdata/example/example.txt"</span><span class="p">,</span>
-                            <span class="n">output_path</span><span class="o">=</span><span class="s">"s3://7parkdata/example/output"</span><span class="p">)</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">NEL</span><span class="o">.</span><span class="n">run_job_transform</span><span class="p">(</span><span class="n">input_path</span><span class="o">=</span><span class="s">"s3://7parkdata/example.jsonl"</span><span class="p">,</span>
+                            <span class="n">output_path</span><span class="o">=</span><span class="s">"s3://7parkdata/output"</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">job</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code>
 </code></pre>
@@ -2187,13 +2214,13 @@ from my_company_database'''</span><span class="p">,</span> <span class="n">conn<
 <td>input_path</td>
 <td>true</td>
 <td>string</td>
-<td>S3 file path. Example: <code>s3://7parkdata/example/example.txt</code> The file should be a <a href="http://jsonlines.org/">jsonlines</a> text file format</td>
+<td>S3 file path. Example: <a href="https://7p-sdk-examples.s3.amazonaws.com/bulk_nel_example.jsonl"><code>s3://7p-sdk-examples/bulk_nel_example.jsonl</code></a> The file should be a <a href="http://jsonlines.org/">jsonlines</a> text file format</td>
 </tr>
 <tr>
 <td>output_path</td>
 <td>true</td>
 <td>string</td>
-<td>S3 folder path. Example: <code>s3://7parkdata/example/output</code></td>
+<td>S3 folder path. Example: <code>s3://7p-sdk-examples/output</code></td>
 </tr>
 </tbody></table>
 <h3 id='status-3'>Status</h3>
@@ -2236,8 +2263,8 @@ from my_company_database'''</span><span class="p">,</span> <span class="n">conn<
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="shell">cURL</a>
                 <a href="#" data-language-name="python">Python</a>
+                <a href="#" data-language-name="shell">cURL</a>
           </div>
       </div>
     </div>
