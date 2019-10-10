@@ -1082,7 +1082,7 @@ export PARK_API_CLIENT_SECRET=<client_secret>
 ```python
 from parklib.sdk.ner import NER
 ner_result = NER.execute(
-    source_type='news',
+    source_type='formal text',
     instances=["Netflix beats the street.","Amazon expands to Austin."]
 )
 print(ner_result)
@@ -1201,7 +1201,7 @@ Run Name entity recognition in real time.
 ```python
 from parklib.sdk.ner import NER
 
-ner_result = NER.execute(source_type='news', instances=["Apple is a company"])
+ner_result = NER.execute(source_type='formal text', instances=["Apple is a company"])
 print(ner_result)
 ```
 
@@ -1210,7 +1210,7 @@ curl -X POST \
   https://api.7parkdata.com/ner/annotate \
   -H 'Authorization: Bearer {token}' \
   -d '{
-       "source_type": "news",
+       "source_type": "formal text",
        "instances": [
               "Apple is a company."
        ]
@@ -1242,7 +1242,7 @@ curl -X POST \
 
 Parameter | Required | Type | Description
 --------- | -------- | ----------- | -----------
-source_type | true | string | Source type to consider. Options include: `news`, `tweets`, and `credit card`
+source_type | true | string | Source type to consider. Options include: `formal text`, `informal text`, and `transaction`
 entity_types | false | array | Entity types to consider. Options include: `NE_TITLE`, `NE_PERSON`, `NE_ORG`, `NE_PRODUCT`, `NE_GPE`, `NE_CURRENCY`, `NE_MERCHANT`, `NE_STORE`, `NE_PAYMENT`, and `NE_DATE`.
 instances | true | array | A list of strings that you wish to be recognized.
 
@@ -1255,7 +1255,7 @@ Run NER bulk job transform.
 ```python
 from parklib.sdk.ner import NER
 
-job_id = NER.run_job_transform(source_type="news",
+job_id = NER.run_job_transform(source_type="formal text",
                                entity_types=["NE_TITLE", "NE_PERSON"],
                                input_path="s3://7parkdata/example.jsonl",
                                output_path="s3://7parkdata/output")
@@ -1278,7 +1278,7 @@ print(job_id)
 
 Parameter | Required | Type | Description
 --------- | -------- | ----------- | -----------
-source_type | true | string | Source type to consider. Options include: `news`, `tweets`, and `credit card`
+source_type | true | string | Source type to consider. Options include: `formal text`, `informal text`, and `transaction`
 entity_types | false | array | Entity types to consider. Options include: `NE_TITLE`, `NE_PERSON`, `NE_ORG`, `NE_PRODUCT`, `NE_GPE`, `NE_CURRENCY`, `NE_MERCHANT`, `NE_STORE`, `NE_PAYMENT`, and `NE_DATE`.
 input_path | true | string | S3 file path. Example: [`s3://7p-sdk-examples/bulk_ner_example.jsonl`](https://7p-sdk-examples.s3.amazonaws.com/bulk_ner_example.jsonl) The file should be a [jsonlines](http://jsonlines.org/) text file format
 output_path | true | string | S3 folder path. Example: `s3://7p-sdk-examples/output`
