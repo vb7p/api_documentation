@@ -1331,6 +1331,7 @@ Reduce noise and create a standard lexicon
 Gain clarity into your data by disambiguating text to establish a single semantic reference for better analysis and enrichment. Our Cleanse solution efficiently and accurately creates consistent text from natural language or transaction data, expediting work that would otherwise be sidelined by discrepancies in spelling, entry methods and miscategorization.
 
 **Make sure the input file is in a tsv(tab separated value) format**
+
 ### String Distance
 
 Run NED - String Distance Model.
@@ -1413,6 +1414,44 @@ angular_distance_threshold | true | float | Max distance in radians between two 
 max_variation_number | true | int | Maximum number of elements included in one canonical item description. Default: 500. Example: `500`
 stopwords | true | list | Stopwords. Example: `[“company”, “co”, “corp”, “llc”]`
 
+
+### Cosine Distance
+
+Run NED - Cosine Distance Model.
+
+> Example Request:
+
+```python
+from parklib.sdk.ned import CosineDistanceNED
+
+job_id = CosineDistanceNED.run_job_transform(target_col_index=3,
+                                             input_path="s3://7parkdata/example/example.txt",
+                                             output_path="s3://7parkdata/example/output",
+                                             column_description={"0": "name", "1": "article"})
+print(job_id)
+```
+
+```shell
+
+```
+
+> Example Response:
+
+```json
+{
+  "bulk_id": "bulk-ned-349f81b4-2fb5-451f-825c-65243610ebfc"
+}
+```
+
+###### Parameters
+
+Parameter | Required | Type | Description
+--------- | -------- | ----------- | -----------
+target_col_index | true | integer | Target column index. `0` Based. Example: `3`
+input_path | true | string | S3 file path. Example: [`s3://7p-sdk-examples/bulk_ned_example.tsv`](https://7p-sdk-examples.s3.amazonaws.com/bulk_ned_example.tsv) The file should be a `tab separated value` file
+output_path | true | string | S3 folder path. Example: `s3://7p-sdk-examples/output`
+column_description | true | dictionary | Description of the column. Key should be the index of column, value should be the column type. column type must be in [] Example: `{“0”: “name”, “1”: “article”}`
+
 ### Status
 
 Check the status of NED job transform.
@@ -1445,7 +1484,6 @@ print(job_status)
 Parameter | Required | Type | Description
 --------- | -------- | ----------- | -----------
 job_id | true | string | The job id return from run_job_transform
-
 
 
 ## 7Park Link
