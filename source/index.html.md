@@ -1330,7 +1330,7 @@ Reduce noise and create a standard lexicon
 
 Gain clarity into your data by disambiguating text to establish a single semantic reference for better analysis and enrichment. Our Cleanse solution efficiently and accurately creates consistent text from natural language or transaction data, expediting work that would otherwise be sidelined by discrepancies in spelling, entry methods and miscategorization.
 
-#### **Make sure the input file is in a tsv(tab separated value) format**
+**Make sure the input file is in a tsv(tab separated value) format**
 ### String Distance
 
 Run NED - String Distance Model.
