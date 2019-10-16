@@ -120,16 +120,16 @@ curl -X GET \
 {
   "data_permission": [
     {
-      "metric_id": 788,
-      "metric_name": "Consumer Card Rev Index",
-      "company_id": 14671,
-      "company_name": "Papa John's Pizza"
+      "metric_id": 70,
+      "metric_name": "App Minutes Index",
+      "company_id": 5820,
+      "company_name": "Spotify"
     },
     {
-      "metric_id": 738,
-      "metric_name": "App Downloads (Android)",
-      "company_id": 7097,
-      "company_name": "Zillow"
+      "metric_id": 740,
+      "metric_name": "App Downloads",
+      "company_id": 5820,
+      "company_name": "Spotify"
     }
   ]
 }
@@ -174,8 +174,8 @@ The Metadata required in all Time Series and Forecast queries are:
 Parameter | Type | Description
 --------- | ----------- | -----------
 company_id | number | The company identifier.
-company_name | string | The company name. E.g. `Netflix, Inc.`
-ticker | string | Company ticker symbol. E.g. `NFLX`
+company_name | string | The company name. E.g. `Spotify`
+ticker | string | Company ticker symbol. E.g. `SPOT`
 
 
 ### List all Companies
@@ -186,7 +186,7 @@ ticker | string | Company ticker symbol. E.g. `NFLX`
 import requests
 
 url = "https://api.7parkdata.com/companies"
-querystring = {"search" : "netflix"}
+querystring = {"search" : "spotify"}
 headers = {"Authorization" : "Bearer " + access_token}
 response = requests.request("GET", url, headers = headers, params = querystring)
 print(response.text)
@@ -194,7 +194,7 @@ print(response.text)
 
 ```shell
 curl -X GET \
-  'https://api.7parkdata.com/companies/?search=netflix' \
+  'https://api.7parkdata.com/companies/?search=spotify' \
   -H 'Authorization: Bearer {token}' \
 ```
 
@@ -207,9 +207,9 @@ curl -X GET \
   "previous": null,
   "results": [
     {
-      "company_id": 4354,
-      "company_name": "Netflix, Inc.",
-      "ticker": "NFLX"
+      "company_id": 5820,
+      "company_name": "Spotify",
+      "ticker": "SPOT"
     }
   ]
 }
@@ -234,7 +234,7 @@ search | query string | false | string | Keyword search
 ```python
 import requests
 
-url = "https://api.7parkdata.com/company/4354"
+url = "https://api.7parkdata.com/company/5820"
 headers = {"Authorization" : "Bearer " + access_token}
 response = requests.request("GET", url, headers = headers)
 print(response.text)
@@ -242,7 +242,7 @@ print(response.text)
 
 ```shell
 curl -X GET \
-  'https://api.7parkdata.com/company/4354' \
+  'https://api.7parkdata.com/company/5820' \
   -H 'Authorization: Bearer {token}' \
 ```
 
@@ -250,9 +250,9 @@ curl -X GET \
 
 ```json
 {
-  "company_id": 4354,
-  "company_name": "Netflix, Inc.",
-  "ticker": "NFLX"
+  "company_id": 5820,
+  "company_name": "Spotify",
+  "ticker": "SPOT"
 }
 ```
 
@@ -275,7 +275,7 @@ company_id | path | true | number | The company identifier.
 ```python
 import requests
 
-url = "https://api.7parkdata.com/company/4354/hierarchy"
+url = "https://api.7parkdata.com/company/5820/hierarchy"
 headers = {"Authorization" : "Bearer " + access_token}
 response = requests.request("GET", url, headers = headers)
 print(response.text)
@@ -283,7 +283,7 @@ print(response.text)
 
 ```shell
 curl -X GET \
-  'https://api.7parkdata.com/company/4354/hierarchy' \
+  'https://api.7parkdata.com/company/5820/hierarchy' \
   -H 'Authorization: Bearer {token}' \
 ```
 
@@ -291,25 +291,40 @@ curl -X GET \
 
 ```json
 {
-    "company_id": 4354,
+    "company_id": 5820,
     "parent_company_id": null,
-    "ultimate_company_id": 4354,
+    "ultimate_company_id": 5820,
     "subsidiaries": [
         {
-            "company_id": 1399191,
-            "external_name": "Netflix Pte Ltd.",
-            "company_name": "Netflix Pte Ltd."
+            "company_id": 746813,
+            "external_name": "Crowd Album, Inc.",
+            "company_name": "Crowd Album, Inc."
         },
         {
-            "company_id": 1399190,
-            "external_name": "NetflixCS, Inc.",
-            "company_name": "NetflixCS, Inc."
+            "company_id": 1728912,
+            "external_name": "Soundtrap AB",
+            "company_name": "Soundtrap AB"
+        },
+        {
+            "company_id": 1742096,
+            "external_name": "Spotify USA, Inc.",
+            "company_name": "Spotify USA, Inc."
+        },
+        {
+            "company_id": 1726139,
+            "external_name": "Sonalytic Ltd.",
+            "company_name": "Sonalytic Ltd."
+        },
+        {
+            "company_id": 1833097,
+            "external_name": "The Echo Nest Corp.",
+            "company_name": "The Echo Nest Corp."
         }
     ],
     "parent_company_name": null,
     "parent_company_ticker_region": null,
-    "ultimate_parent_company_ticker_region": "NFLX-US",
-    "ultimate_parent_company_name": "Netflix, Inc."
+    "ultimate_parent_company_ticker_region": null,
+    "ultimate_parent_company_name": "Spotify Technology SA"
 }
 ```
 
@@ -343,7 +358,7 @@ metric_description | string | Description of the metric. E.g. `Count of Android 
 ```python
 import requests
 
-url = "https://api.7parkdata.com/company/4354/metrics"
+url = "https://api.7parkdata.com/company/5820/metrics"
 headers={"Authorization" : "Bearer " + access_token}
 response=requests.request("GET", url, headers = headers)
 print(response.text)
@@ -351,7 +366,7 @@ print(response.text)
 
 ```shell
 curl -X GET \
-  'https://api.7parkdata.com/company/4354/metrics' \
+  'https://api.7parkdata.com/company/5820/metrics' \
   -H 'Authorization: Bearer {token}' \
 ```
 
@@ -359,7 +374,7 @@ curl -X GET \
 
 ```json
 {
-  "count": 9,
+  "count": 2,
   "next": null,
   "previous": null,
   "results": [
@@ -396,7 +411,7 @@ company_id | path | true | number | company_id
 ```python
 import requests
 
-url = "https://api.7parkdata.com/company/4354/metric/740"
+url = "https://api.7parkdata.com/company/5820/metric/740"
 headers={"Authorization" : "Bearer " + access_token}
 response=requests.request("GET", url, headers = headers)
 print(response.text)
@@ -404,7 +419,7 @@ print(response.text)
 
 ```shell
 curl -X GET \
-  'https://api.7parkdata.com/company/4354/metric/740' \
+  'https://api.7parkdata.com/company/5820/metric/740' \
   -H 'Authorization: Bearer {token}' \
 ```
 
@@ -438,7 +453,7 @@ metric_id | path | true | number | metric_id
 Parameter | Type | Description
 --------- | ----------- | -----------
 entity_id | number | The entity identifier.
-entity_name | string | The entity name. E.g. `Uber Eats: Local Food Delivery`
+entity_name | string | The entity name. E.g. `Spotify Music`
 
 ### List all Entities 
 
@@ -447,7 +462,7 @@ entity_name | string | The entity name. E.g. `Uber Eats: Local Food Delivery`
 ```python
 import requests
 
-url = "https://api.7parkdata.com/company/14301/metric/740/entities"
+url = "https://api.7parkdata.com/company/5820/metric/740/entities"
 headers={"Authorization" : "Bearer " + access_token}
 response=requests.request("GET", url, headers = headers)
 print(response.text)
@@ -455,7 +470,7 @@ print(response.text)
 
 ```shell
 curl -X GET \
-  'https://api.7parkdata.com/company/14301/metric/740/entities' \
+  'https://api.7parkdata.com/company/5820/metric/740/entities' \
   -H 'Authorization: Bearer {token}' \
 ```
 
@@ -463,25 +478,13 @@ curl -X GET \
 
 ```json
 {
-  "count": 4,
+  "count": 1,
   "next": null,
   "previous": null,
   "results": [
     {
-      "entity_id": 1931919,
-      "entity_name": "Uber & Uber Eats"
-    },
-    {
-      "entity_id": 1927747,
-      "entity_name": "Uber"
-    },
-    {
-      "entity_id": 1927749,
-      "entity_name": "Uber Eats: Local Food Delivery"
-    },
-    {
-      "entity_id": 1927748,
-      "entity_name": "Uber Driver"
+      "entity_id": 1928293,
+      "entity_name": "Spotify Music"
     }
   ]
 }
@@ -507,7 +510,7 @@ metric_id | path | true | number | metric_id
 ```python
 import requests
 
-url = "https://api.7parkdata.com/company/14301/metric/740/entity/1927749"
+url = "https://api.7parkdata.com/company/5820/metric/740/entity/1928293"
 headers={"Authorization" : "Bearer " + access_token}
 response=requests.request("GET", url, headers = headers)
 print(response.text)
@@ -515,7 +518,7 @@ print(response.text)
 
 ```shell
 curl -X GET \
-  'https://api.7parkdata.com/company/14301/metric/740/entity/1927749' \
+  'https://api.7parkdata.com/company/5820/metric/740/entity/1928293' \
   -H 'Authorization: Bearer {token}' \
 ```
 
@@ -523,8 +526,8 @@ curl -X GET \
 
 ```json
 {
-    "entity_id": 1927749,
-    "entity_name": "Uber Eats: Local Food Delivery"
+    "entity_id": 1928293,
+    "entity_name": "Spotify Music"
 }
 ```
 
@@ -552,7 +555,7 @@ metric_id | path | true | number | metric_id
 ```python
 import requests
 
-url = "https://api.7parkdata.com/company/14301/metric/740/entity/1927747/queries"
+url = "https://api.7parkdata.com/company/5820/metric/740/entity/1928293/queries"
 headers={"Authorization" : "Bearer " + access_token}
 response=requests.request("GET", url, headers = headers)
 print(response.text)
@@ -560,7 +563,7 @@ print(response.text)
 
 ```shell
 curl -X GET \
-  'https://api.7parkdata.com/company/14301/metric/740/entity/1927747/queries' \
+  'https://api.7parkdata.com/company/5820/metric/740/entity/1928293/queries' \
   -H 'Authorization: Bearer {token}' \
 ```
 
@@ -570,20 +573,28 @@ curl -X GET \
 {
   "queries": [
     {
-      "entity_id": 1927747,
+      "entity_id": 1928293,
       "metric_id": 740,
       "metric_periodicity": "Daily",
-      "discovery_name": "Uber",
-      "country_name": "Mexico",
-      "company_name": "Uber"
+      "discovery_name": "Spotify Music",
+      "country_name": "Germany",
+      "company_name": "Spotify"
     },
     {
-      "entity_id": 1927747,
+      "entity_id": 1928293,
       "metric_id": 740,
       "metric_periodicity": "Daily",
-      "discovery_name": "Uber",
-      "country_name": "Brazil",
-      "company_name": "Uber"
+      "discovery_name": "Spotify Music",
+      "country_name": "France",
+      "company_name": "Spotify"
+    },
+    {
+      "entity_id": 1928293,
+      "metric_id": 740,
+      "metric_periodicity": "Daily",
+      "discovery_name": "Spotify Music",
+      "country_name": "United States of America",
+      "company_name": "Spotify"
     }
   ]
 }
@@ -611,7 +622,7 @@ entity_id | path | true | string | entity_id
 ```python
 import requests
 
-url = "https://api.7parkdata.com/data?entity_id=1927747&metric_periodicity=Daily&country_name=United%20States%20of%20America&metric_id=740"
+url = "https://api.7parkdata.com/data?entity_id=1928293&metric_periodicity=Daily&country_name=United%20States%20of%20America&metric_id=740"
 headers={"Authorization" : "Bearer " + access_token}
 response=requests.request("GET", url, headers = headers)
 print(response.text)
@@ -619,7 +630,7 @@ print(response.text)
 
 ```shell
 curl -X GET \
-  'https://api.7parkdata.com/data?entity_id=1927747&metric_periodicity=Daily&country_name=United%20States%20of%20America&metric_id=740' \
+  'https://api.7parkdata.com/data?entity_id=1928293&metric_periodicity=Daily&country_name=United%20States%20of%20America&metric_id=740' \
   -H 'Authorization: Bearer {token}' \
 ```
 
@@ -630,14 +641,12 @@ curl -X GET \
     "status": "ok",
     "query": {
         "msa_name": "N/A",
-        "entity_id": 1927747,
+        "entity_id": 1928293,
         "metric_id": 740,
         "metric_periodicity": "Daily",
-        "date_from": "2019-01-01",
         "world_region_name": "N/A",
         "us_region_name": "N/A",
         "us_state_name": "N/A",
-        "date_to": "2019-08-01",
         "country_name": "United States of America",
         "cohort_descripton": "{\"gender\":\"N/A\",\"age_group\":\"N/A\",\"cohort_grouping\":\"N/A\"}"
     },
@@ -646,22 +655,44 @@ curl -X GET \
         {
             "world_region_name": "N/A",
             "metric_id": 740,
-            "company": "Uber",
+            "company": "Spotify",
             "us_region_name": "N/A",
-            "value": 83165.0,
-            "date": "2019-01-01",
-            "period_end": "2019-01-01",
+            "value": 87767.0,
+            "date": "2015-01-01",
+            "period_end": "2015-01-01",
             "country_name": "United States of America",
             "metric_name": "App Downloads"
         },
         {
             "world_region_name": "N/A",
             "metric_id": 740,
-            "company": "Uber",
+            "company": "Spotify",
             "us_region_name": "N/A",
-            "value": 70827.0,
-            "date": "2019-01-02",
-            "period_end": "2019-01-02",
+            "value": 80433.0,
+            "date": "2015-01-02",
+            "period_end": "2015-01-02",
+            "country_name": "United States of America",
+            "metric_name": "App Downloads"
+        },
+        {
+            "world_region_name": "N/A",
+            "metric_id": 740,
+            "company": "Spotify",
+            "us_region_name": "N/A",
+            "value": 84000.0,
+            "date": "2015-01-03",
+            "period_end": "2015-01-03",
+            "country_name": "United States of America",
+            "metric_name": "App Downloads"
+        },
+        {
+            "world_region_name": "N/A",
+            "metric_id": 740,
+            "company": "Spotify",
+            "us_region_name": "N/A",
+            "value": 81330.0,
+            "date": "2015-01-04",
+            "period_end": "2015-01-04",
             "country_name": "United States of America",
             "metric_name": "App Downloads"
         }
@@ -714,29 +745,29 @@ curl -X GET \
 
 ```json
 {
-  "count": 124,
-  "next": "https://api.7parkdata.com/forecasts/?page=2",
+  "count": 2,
+  "next": null,
   "previous": null,
   "results": [
     {
-      "company_id": 2010,
-      "company_name": "Facebook",
-      "entity_id": 1931918,
-      "entity_name": "Facebook & Instagram",
+      "company_id": 5820,
+      "company_name": "Spotify",
+      "entity_id": 1928293,
+      "entity_name": "Spotify Music",
       "metric_id": 740,
       "metric_name": "App Downloads",
       "forecast_metric_name": "Total MAU",
       "recent_data_through": "2019-06-24"
     },
     {
-      "company_id": 10141,
-      "company_name": "Lululemon Athletica",
-      "entity_id": 56810,
-      "entity_name": "lululemon",
-      "metric_id": 761,
-      "metric_name": "Receipt Revenue Index",
-      "forecast_metric_name": "Adjusted Revenue",
-      "recent_data_through": "2019-08-10"
+      "company_id": 5820,
+      "company_name": "Spotify",
+      "entity_id": 1899099,
+      "entity_name": "Spotify Music",
+      "metric_id": 71,
+      "metric_name": "App Sessions Index",
+      "forecast_metric_name": "Total MAU",
+      "recent_data_through": "2018-07-21"
     }
   ]
 }
@@ -766,7 +797,7 @@ page_size | query string | false | string | page_size
 ```python
 import requests
 
-url = "https://api.7parkdata.com/company/14301/metric/740/entity/1940111/forecast/snapshot"
+url = "https://api.7parkdata.com/company/5820/metric/740/entity/1928293/forecast/snapshot"
 headers={"Authorization" : "Bearer " + access_token}
 response=requests.request("GET", url, headers = headers)
 print(response.text)
@@ -774,7 +805,7 @@ print(response.text)
 
 ```shell
 curl -X GET \
-  'https://api.7parkdata.com/company/14301/metric/740/entity/1940111/forecast/snapshot' \
+  'https://api.7parkdata.com/company/5820/metric/740/entity/1928293/forecast/snapshot' \
   -H 'Authorization: Bearer {token}' \
 ```
 
@@ -782,40 +813,40 @@ curl -X GET \
 
 ```json
 {
-    "business_entity_name": "Netflix",
+    "business_entity_name": "Spotify Music",
     "metricvals": [
         {
-            "forecast_model": "Y/Y",
-            "period_effective_end_date": "2017-06-30",
+            "forecast_model": "Q/Q",
+            "period_effective_end_date": "2016-06-30",
             "methodology": "unspecified",
-            "forecast": 47787.1869370347,
+            "forecast": 105.919387762599,
             "data_through": "2018-07-09",
-            "period_effective_start_date": "2017-04-01",
+            "period_effective_start_date": "2016-04-01",
             "is_published": "N"
         },
         {
-            "forecast_model": "Y/Y",
-            "period_effective_end_date": "2017-09-30",
+            "forecast_model": "Q/Q",
+            "period_effective_end_date": "2016-09-30",
             "methodology": "unspecified",
-            "forecast": 52153.251969142,
+            "forecast": 114.138462458071,
             "data_through": "2018-07-09",
-            "period_effective_start_date": "2017-07-01",
+            "period_effective_start_date": "2016-07-01",
             "is_published": "N"
         },
         {
-            "forecast_model": "Y/Y",
-            "period_effective_end_date": "2017-12-31",
+            "forecast_model": "Q/Q",
+            "period_effective_end_date": "2016-12-31",
             "methodology": "unspecified",
-            "forecast": 54009.2938156461,
+            "forecast": 122.94400133493,
             "data_through": "2018-07-09",
-            "period_effective_start_date": "2017-10-01",
+            "period_effective_start_date": "2016-10-01",
             "is_published": "N"
-        },
+        }
     ],
     "metric_id": 768,
-    "company_id": 4354,
-    "forecast_metric": "U.S. Subscribers",
-    "company_name": "Netflix, Inc.",
+    "company_id": 5820,
+    "forecast_metric": "Total MAU",
+    "company_name": "Spotify",
     "lpi": "App Downloads"
 }
 ```
@@ -842,7 +873,7 @@ entity_id | path | true | string | entity_id
 ```python
 import requests
 
-url = "https://api.7parkdata.com/company/4354/metric/740/entity/1940111/forecast"
+url = "https://api.7parkdata.com/company/5820/metric/740/entity/1928293/forecast"
 headers={"Authorization" : "Bearer " + access_token}
 response=requests.request("GET", url, headers = headers)
 print(response.text)
@@ -850,7 +881,7 @@ print(response.text)
 
 ```shell
 curl -X GET \
-  'https://api.7parkdata.com/company/4354/metric/740/entity/1940111/forecast' \
+  'https://api.7parkdata.com/company/5820/metric/740/entity/1928293/forecast' \
   -H 'Authorization: Bearer {token}' \
 ```
 
@@ -858,48 +889,48 @@ curl -X GET \
 
 ```json
 {
-    "forecast_metric_name": "U.S. Subscribers",
-    "forecast_unit": "",
+    "forecast_metric_name": "Total MAU",
+    "forecast_unit": "MM",
     "period_effective_start_date": "2019-04-01",
     "period_effective_end_date": "2019-06-30",
-    "entity_name": "Netflix",
+    "entity_name": "Spotify Music",
     "permission": true,
     "data": [
         {
-            "forecast": 60588.4693430389,
+            "forecast": 228.97154658129,
             "r_squared": "",
             "correlation": "",
             "description": "Based on quarter over quarter quarterly growth rates.",
             "queries": [
                 {
-                    "entity_id": 1916255,
+                    "entity_id": 1916258,
                     "metric_id": 768,
                     "metric_periodicity": "Quarter_Over_Quarter",
                     "metric_type": "7Park Data"
                 },
                 {
-                    "entity_id": 1916255,
-                    "metric_id": 704,
+                    "entity_id": 1916258,
+                    "metric_id": 694,
                     "metric_periodicity": "Quarter_Over_Quarter",
                     "metric_type": "reported"
                 }
             ]
         },
         {
-            "forecast": 64069.7707137404,
+            "forecast": "",
             "r_squared": "",
             "correlation": "",
             "description": "Based on year over year quarterly growth rates.",
             "queries": [
                 {
-                    "entity_id": 1916255,
+                    "entity_id": 1916258,
                     "metric_id": 768,
                     "metric_periodicity": "Year_Over_Year",
                     "metric_type": "7Park Data"
                 },
                 {
-                    "entity_id": 1916255,
-                    "metric_id": 704,
+                    "entity_id": 1916258,
+                    "metric_id": 694,
                     "metric_periodicity": "Year_Over_Year",
                     "metric_type": "reported"
                 }
@@ -931,7 +962,7 @@ entity_id | path | true | string | entity_id
 ```python
 import requests
 
-url = "https://api.7parkdata.com/company/14301/metric/740/entity/1940111/forecast/history"
+url = "https://api.7parkdata.com/company/5820/metric/740/entity/1928293/forecast/history"
 headers={"Authorization" : "Bearer " + access_token}
 response=requests.request("GET", url, headers = headers)
 print(response.text)
@@ -939,7 +970,7 @@ print(response.text)
 
 ```shell
 curl -X GET \
-  'https://api.7parkdata.com/company/14301/metric/740/entity/1940111/forecast/history' \
+  'https://api.7parkdata.com/company/5820/metric/740/entity/1928293/forecast/history' \
   -H 'Authorization: Bearer {token}' \
 ```
 
@@ -949,8 +980,8 @@ curl -X GET \
 {
     "status": "ok",
     "query": {
-        "reported_metric_id": 704,
-        "entity_id": 1916255,
+        "reported_metric_id": 694,
+        "entity_id": 1916258,
         "metric_id": 768
     },
     "errors": [],
@@ -958,21 +989,37 @@ curl -X GET \
         {
             "metric_id": 768,
             "metric_periodicity": "Quarter_Over_Quarter",
-            "entity_name": "Netflix",
-            "company": "Netflix, Inc.",
+            "entity_name": "Spotify Music",
+            "company": "Spotify",
             "period_effective_end_date": "2018-03-31",
             "methodology": "unspecified",
-            "forecast": 56060.01019,
+            "forecast": 170.156563,
             "data_through": "2018-04-09",
             "forecast_unit": null,
             "correlation": null,
             "period_effective_start_date": "2018-01-01",
             "r_squared": null,
-            "metric_name_reported": "U.S. Subscribers",
+            "metric_name_reported": "Total MAU",
+            "metric_name": "DownloadsAndroidiOS"
+        },
+        {
+            "metric_id": 768,
+            "metric_periodicity": "Quarter_Over_Quarter",
+            "entity_name": "Spotify Music",
+            "company": "Spotify",
+            "period_effective_end_date": "2018-03-31",
+            "methodology": "unspecified",
+            "forecast": 169.881474,
+            "data_through": "2018-04-16",
+            "forecast_unit": null,
+            "correlation": null,
+            "period_effective_start_date": "2018-01-01",
+            "r_squared": null,
+            "metric_name_reported": "Total MAU",
             "metric_name": "DownloadsAndroidiOS"
         }
     ],
-    "description": "company name: Netflix, Inc.; entity: Netflix; dimensions: {}; metric: DownloadsAndroidiOS; metric_periodicity: N/A"
+    "description": "company name: Spotify; entity: Spotify Music; dimensions: {}; metric: DownloadsAndroidiOS; metric_periodicity: N/A"
 }
 ```
 

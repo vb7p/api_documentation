@@ -348,13 +348,13 @@
                     <a href="#7park-cleanse" class="toc-h2 toc-link" data-title="7Park Cleanse">7Park Cleanse</a>
                       <ul class="toc-list-h3">
                           <li>
-                            <a href="#make-sure-the-input-file-is-in-a-tsv-tab-separated-value-format" class="toc-h3 toc-link" data-title="<strong>Make sure the input file is in a tsv(tab separated value) format</strong>"><strong>Make sure the input file is in a tsv(tab separated value) format</strong></a>
-                          </li>
-                          <li>
                             <a href="#string-distance" class="toc-h3 toc-link" data-title="String Distance">String Distance</a>
                           </li>
                           <li>
                             <a href="#word-embedding" class="toc-h3 toc-link" data-title="Word Embedding">Word Embedding</a>
+                          </li>
+                          <li>
+                            <a href="#cosine-distance" class="toc-h3 toc-link" data-title="Cosine Distance">Cosine Distance</a>
                           </li>
                           <li>
                             <a href="#status-2" class="toc-h3 toc-link" data-title="Status">Status</a>
@@ -475,16 +475,16 @@ The access token expires every 24 hours. After which, you must get a new one to 
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"data_permission"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">788</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"metric_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Consumer Card Rev Index"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">14671</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Papa John's Pizza"</span><span class="w">
+      </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"metric_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"App Minutes Index"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5820</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spotify"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">738</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"metric_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"App Downloads (Android)"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7097</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Zillow"</span><span class="w">
+      </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">740</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"metric_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"App Downloads"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5820</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spotify"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -562,12 +562,12 @@ The access token expires every 24 hours. After which, you must get a new one to 
 <tr>
 <td>company_name</td>
 <td>string</td>
-<td>The company name. E.g. <code>Netflix, Inc.</code></td>
+<td>The company name. E.g. <code>Spotify</code></td>
 </tr>
 <tr>
 <td>ticker</td>
 <td>string</td>
-<td>Company ticker symbol. E.g. <code>NFLX</code></td>
+<td>Company ticker symbol. E.g. <code>SPOT</code></td>
 </tr>
 </tbody></table>
 <h3 id='list-all-companies'>List all Companies</h3>
@@ -577,12 +577,12 @@ The access token expires every 24 hours. After which, you must get a new one to 
 <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/companies"</span>
-<span class="n">querystring</span> <span class="o">=</span> <span class="p">{</span><span class="s">"search"</span> <span class="p">:</span> <span class="s">"netflix"</span><span class="p">}</span>
+<span class="n">querystring</span> <span class="o">=</span> <span class="p">{</span><span class="s">"search"</span> <span class="p">:</span> <span class="s">"spotify"</span><span class="p">}</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span> <span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="n">querystring</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
-  <span class="s1">'https://api.7parkdata.com/companies/?search=netflix'</span> <span class="se">\</span>
+  <span class="s1">'https://api.7parkdata.com/companies/?search=spotify'</span> <span class="se">\</span>
   -H <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
 </code></pre>
 <blockquote>
@@ -594,9 +594,9 @@ The access token expires every 24 hours. After which, you must get a new one to 
   </span><span class="s2">"previous"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4354</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Netflix, Inc."</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NFLX"</span><span class="w">
+      </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5820</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spotify"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SPOT"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -628,21 +628,21 @@ The access token expires every 24 hours. After which, you must get a new one to 
 </blockquote>
 <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/company/4354"</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/company/5820"</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span> <span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
-  <span class="s1">'https://api.7parkdata.com/company/4354'</span> <span class="se">\</span>
+  <span class="s1">'https://api.7parkdata.com/company/5820'</span> <span class="se">\</span>
   -H <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
 </code></pre>
 <blockquote>
 <p>Example Response:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4354</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Netflix, Inc."</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NFLX"</span><span class="w">
+  </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5820</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spotify"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SPOT"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Get a Specific Company.</p>
@@ -672,37 +672,52 @@ The access token expires every 24 hours. After which, you must get a new one to 
 </blockquote>
 <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/company/4354/hierarchy"</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/company/5820/hierarchy"</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Authorization"</span> <span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
-  <span class="s1">'https://api.7parkdata.com/company/4354/hierarchy'</span> <span class="se">\</span>
+  <span class="s1">'https://api.7parkdata.com/company/5820/hierarchy'</span> <span class="se">\</span>
   -H <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
 </code></pre>
 <blockquote>
 <p>Example Response:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4354</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5820</span><span class="p">,</span><span class="w">
     </span><span class="s2">"parent_company_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"ultimate_company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4354</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ultimate_company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5820</span><span class="p">,</span><span class="w">
     </span><span class="s2">"subsidiaries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1399191</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"external_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Netflix Pte Ltd."</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Netflix Pte Ltd."</span><span class="w">
+            </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">746813</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"external_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Crowd Album, Inc."</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Crowd Album, Inc."</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1399190</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"external_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NetflixCS, Inc."</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NetflixCS, Inc."</span><span class="w">
+            </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1728912</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"external_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Soundtrap AB"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Soundtrap AB"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1742096</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"external_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spotify USA, Inc."</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spotify USA, Inc."</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1726139</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"external_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sonalytic Ltd."</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sonalytic Ltd."</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1833097</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"external_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The Echo Nest Corp."</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The Echo Nest Corp."</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="s2">"parent_company_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="s2">"parent_company_ticker_region"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"ultimate_parent_company_ticker_region"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NFLX-US"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"ultimate_parent_company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Netflix, Inc."</span><span class="w">
+    </span><span class="s2">"ultimate_parent_company_ticker_region"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ultimate_parent_company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spotify Technology SA"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Retrieve Company Hierarchy.</p>
@@ -756,19 +771,19 @@ The access token expires every 24 hours. After which, you must get a new one to 
 </blockquote>
 <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/company/4354/metrics"</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/company/5820/metrics"</span>
 <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">"Authorization"</span> <span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
 <span class="n">response</span><span class="o">=</span><span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
-  <span class="s1">'https://api.7parkdata.com/company/4354/metrics'</span> <span class="se">\</span>
+  <span class="s1">'https://api.7parkdata.com/company/5820/metrics'</span> <span class="se">\</span>
   -H <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
 </code></pre>
 <blockquote>
 <p>Example Response:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
   </span><span class="s2">"next"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="s2">"previous"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -812,12 +827,12 @@ The access token expires every 24 hours. After which, you must get a new one to 
 </blockquote>
 <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/company/4354/metric/740"</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/company/5820/metric/740"</span>
 <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">"Authorization"</span> <span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
 <span class="n">response</span><span class="o">=</span><span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
-  <span class="s1">'https://api.7parkdata.com/company/4354/metric/740'</span> <span class="se">\</span>
+  <span class="s1">'https://api.7parkdata.com/company/5820/metric/740'</span> <span class="se">\</span>
   -H <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
 </code></pre>
 <blockquote>
@@ -873,7 +888,7 @@ The access token expires every 24 hours. After which, you must get a new one to 
 <tr>
 <td>entity_name</td>
 <td>string</td>
-<td>The entity name. E.g. <code>Uber Eats: Local Food Delivery</code></td>
+<td>The entity name. E.g. <code>Spotify Music</code></td>
 </tr>
 </tbody></table>
 <h3 id='list-all-entities'>List all Entities</h3>
@@ -882,37 +897,25 @@ The access token expires every 24 hours. After which, you must get a new one to 
 </blockquote>
 <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/company/14301/metric/740/entities"</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/company/5820/metric/740/entities"</span>
 <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">"Authorization"</span> <span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
 <span class="n">response</span><span class="o">=</span><span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
-  <span class="s1">'https://api.7parkdata.com/company/14301/metric/740/entities'</span> <span class="se">\</span>
+  <span class="s1">'https://api.7parkdata.com/company/5820/metric/740/entities'</span> <span class="se">\</span>
   -H <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
 </code></pre>
 <blockquote>
 <p>Example Response:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"next"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="s2">"previous"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1931919</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"entity_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Uber &amp; Uber Eats"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1927747</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"entity_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Uber"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1927749</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"entity_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Uber Eats: Local Food Delivery"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1927748</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"entity_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Uber Driver"</span><span class="w">
+      </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1928293</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"entity_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spotify Music"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -951,20 +954,20 @@ The access token expires every 24 hours. After which, you must get a new one to 
 </blockquote>
 <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/company/14301/metric/740/entity/1927749"</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/company/5820/metric/740/entity/1928293"</span>
 <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">"Authorization"</span> <span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
 <span class="n">response</span><span class="o">=</span><span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
-  <span class="s1">'https://api.7parkdata.com/company/14301/metric/740/entity/1927749'</span> <span class="se">\</span>
+  <span class="s1">'https://api.7parkdata.com/company/5820/metric/740/entity/1928293'</span> <span class="se">\</span>
   -H <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
 </code></pre>
 <blockquote>
 <p>Example Response:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1927749</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"entity_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Uber Eats: Local Food Delivery"</span><span class="w">
+    </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1928293</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"entity_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spotify Music"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Get Entities.</p>
@@ -1001,12 +1004,12 @@ The access token expires every 24 hours. After which, you must get a new one to 
 </blockquote>
 <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/company/14301/metric/740/entity/1927747/queries"</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/company/5820/metric/740/entity/1928293/queries"</span>
 <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">"Authorization"</span> <span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
 <span class="n">response</span><span class="o">=</span><span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
-  <span class="s1">'https://api.7parkdata.com/company/14301/metric/740/entity/1927747/queries'</span> <span class="se">\</span>
+  <span class="s1">'https://api.7parkdata.com/company/5820/metric/740/entity/1928293/queries'</span> <span class="se">\</span>
   -H <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
 </code></pre>
 <blockquote>
@@ -1015,20 +1018,28 @@ The access token expires every 24 hours. After which, you must get a new one to 
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"queries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1927747</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1928293</span><span class="p">,</span><span class="w">
       </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">740</span><span class="p">,</span><span class="w">
       </span><span class="s2">"metric_periodicity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Daily"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"discovery_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Uber"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"country_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mexico"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Uber"</span><span class="w">
+      </span><span class="s2">"discovery_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spotify Music"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"country_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Germany"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spotify"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1927747</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1928293</span><span class="p">,</span><span class="w">
       </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">740</span><span class="p">,</span><span class="w">
       </span><span class="s2">"metric_periodicity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Daily"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"discovery_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Uber"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"country_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Brazil"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Uber"</span><span class="w">
+      </span><span class="s2">"discovery_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spotify Music"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"country_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"France"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spotify"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1928293</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">740</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"metric_periodicity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Daily"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"discovery_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spotify Music"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"country_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United States of America"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spotify"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1074,12 +1085,12 @@ The access token expires every 24 hours. After which, you must get a new one to 
 </blockquote>
 <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/data?entity_id=1927747&amp;metric_periodicity=Daily&amp;country_name=United</span><span class="si">%20</span><span class="s">States</span><span class="si">%20</span><span class="s">of</span><span class="si">%20</span><span class="s">America&amp;metric_id=740"</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/data?entity_id=1928293&amp;metric_periodicity=Daily&amp;country_name=United</span><span class="si">%20</span><span class="s">States</span><span class="si">%20</span><span class="s">of</span><span class="si">%20</span><span class="s">America&amp;metric_id=740"</span>
 <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">"Authorization"</span> <span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
 <span class="n">response</span><span class="o">=</span><span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
-  <span class="s1">'https://api.7parkdata.com/data?entity_id=1927747&amp;metric_periodicity=Daily&amp;country_name=United%20States%20of%20America&amp;metric_id=740'</span> <span class="se">\</span>
+  <span class="s1">'https://api.7parkdata.com/data?entity_id=1928293&amp;metric_periodicity=Daily&amp;country_name=United%20States%20of%20America&amp;metric_id=740'</span> <span class="se">\</span>
   -H <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
 </code></pre>
 <blockquote>
@@ -1089,14 +1100,12 @@ The access token expires every 24 hours. After which, you must get a new one to 
     </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"msa_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"N/A"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1927747</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1928293</span><span class="p">,</span><span class="w">
         </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">740</span><span class="p">,</span><span class="w">
         </span><span class="s2">"metric_periodicity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Daily"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"date_from"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-01"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"world_region_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"N/A"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"us_region_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"N/A"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"us_state_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"N/A"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"date_to"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-08-01"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"country_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United States of America"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"cohort_descripton"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{</span><span class="se">\"</span><span class="s2">gender</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">N/A</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">age_group</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">N/A</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">cohort_grouping</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">N/A</span><span class="se">\"</span><span class="s2">}"</span><span class="w">
     </span><span class="p">},</span><span class="w">
@@ -1105,22 +1114,44 @@ The access token expires every 24 hours. After which, you must get a new one to 
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"world_region_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"N/A"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">740</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Uber"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spotify"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"us_region_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"N/A"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">83165.0</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-01"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"period_end"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-01"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">87767.0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"period_end"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-01"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"country_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United States of America"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"metric_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"App Downloads"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"world_region_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"N/A"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">740</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Uber"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spotify"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"us_region_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"N/A"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">70827.0</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"period_end"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-02"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">80433.0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-02"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"period_end"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-02"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"country_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United States of America"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"metric_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"App Downloads"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"world_region_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"N/A"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">740</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spotify"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"us_region_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"N/A"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">84000.0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-03"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"period_end"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-03"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"country_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United States of America"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"metric_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"App Downloads"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"world_region_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"N/A"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">740</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spotify"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"us_region_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"N/A"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">81330.0</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-04"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"period_end"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-04"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"country_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United States of America"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"metric_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"App Downloads"</span><span class="w">
         </span><span class="p">}</span><span class="w">
@@ -1222,29 +1253,29 @@ The access token expires every 24 hours. After which, you must get a new one to 
 <p>Example Response:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">124</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.7parkdata.com/forecasts/?page=2"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"next"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="s2">"previous"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2010</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Facebook"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1931918</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"entity_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Facebook &amp; Instagram"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5820</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spotify"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1928293</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"entity_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spotify Music"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">740</span><span class="p">,</span><span class="w">
       </span><span class="s2">"metric_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"App Downloads"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"forecast_metric_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Total MAU"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"recent_data_through"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-06-24"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10141</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lululemon Athletica"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">56810</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"entity_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lululemon"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">761</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"metric_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Receipt Revenue Index"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"forecast_metric_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Adjusted Revenue"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"recent_data_through"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-08-10"</span><span class="w">
+      </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5820</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spotify"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1899099</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"entity_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spotify Music"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">71</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"metric_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"App Sessions Index"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"forecast_metric_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Total MAU"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"recent_data_through"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-07-21"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1304,52 +1335,52 @@ The access token expires every 24 hours. After which, you must get a new one to 
 </blockquote>
 <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/company/14301/metric/740/entity/1940111/forecast/snapshot"</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/company/5820/metric/740/entity/1928293/forecast/snapshot"</span>
 <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">"Authorization"</span> <span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
 <span class="n">response</span><span class="o">=</span><span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
-  <span class="s1">'https://api.7parkdata.com/company/14301/metric/740/entity/1940111/forecast/snapshot'</span> <span class="se">\</span>
+  <span class="s1">'https://api.7parkdata.com/company/5820/metric/740/entity/1928293/forecast/snapshot'</span> <span class="se">\</span>
   -H <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
 </code></pre>
 <blockquote>
 <p>Example Response:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"business_entity_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Netflix"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"business_entity_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spotify Music"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"metricvals"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"forecast_model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Y/Y"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"period_effective_end_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-06-30"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"forecast_model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Q/Q"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"period_effective_end_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-30"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"methodology"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unspecified"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"forecast"</span><span class="p">:</span><span class="w"> </span><span class="mf">47787.1869370347</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"forecast"</span><span class="p">:</span><span class="w"> </span><span class="mf">105.919387762599</span><span class="p">,</span><span class="w">
             </span><span class="s2">"data_through"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-07-09"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"period_effective_start_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-04-01"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"period_effective_start_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-01"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"is_published"</span><span class="p">:</span><span class="w"> </span><span class="s2">"N"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"forecast_model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Y/Y"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"period_effective_end_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-30"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"forecast_model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Q/Q"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"period_effective_end_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-09-30"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"methodology"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unspecified"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"forecast"</span><span class="p">:</span><span class="w"> </span><span class="mf">52153.251969142</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"forecast"</span><span class="p">:</span><span class="w"> </span><span class="mf">114.138462458071</span><span class="p">,</span><span class="w">
             </span><span class="s2">"data_through"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-07-09"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"period_effective_start_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-01"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"period_effective_start_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-07-01"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"is_published"</span><span class="p">:</span><span class="w"> </span><span class="s2">"N"</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"forecast_model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Y/Y"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"period_effective_end_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-31"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"forecast_model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Q/Q"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"period_effective_end_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-31"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"methodology"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unspecified"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"forecast"</span><span class="p">:</span><span class="w"> </span><span class="mf">54009.2938156461</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"forecast"</span><span class="p">:</span><span class="w"> </span><span class="mf">122.94400133493</span><span class="p">,</span><span class="w">
             </span><span class="s2">"data_through"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-07-09"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"period_effective_start_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-01"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"period_effective_start_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-01"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"is_published"</span><span class="p">:</span><span class="w"> </span><span class="s2">"N"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
+        </span><span class="p">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">768</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4354</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"forecast_metric"</span><span class="p">:</span><span class="w"> </span><span class="s2">"U.S. Subscribers"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Netflix, Inc."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5820</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"forecast_metric"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Total MAU"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spotify"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"lpi"</span><span class="p">:</span><span class="w"> </span><span class="s2">"App Downloads"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -1394,60 +1425,60 @@ The access token expires every 24 hours. After which, you must get a new one to 
 </blockquote>
 <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/company/4354/metric/740/entity/1940111/forecast"</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/company/5820/metric/740/entity/1928293/forecast"</span>
 <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">"Authorization"</span> <span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
 <span class="n">response</span><span class="o">=</span><span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
-  <span class="s1">'https://api.7parkdata.com/company/4354/metric/740/entity/1940111/forecast'</span> <span class="se">\</span>
+  <span class="s1">'https://api.7parkdata.com/company/5820/metric/740/entity/1928293/forecast'</span> <span class="se">\</span>
   -H <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
 </code></pre>
 <blockquote>
 <p>Example Response:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"forecast_metric_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"U.S. Subscribers"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"forecast_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"forecast_metric_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Total MAU"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"forecast_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MM"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"period_effective_start_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-04-01"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"period_effective_end_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-06-30"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"entity_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Netflix"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"entity_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spotify Music"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"permission"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"forecast"</span><span class="p">:</span><span class="w"> </span><span class="mf">60588.4693430389</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"forecast"</span><span class="p">:</span><span class="w"> </span><span class="mf">228.97154658129</span><span class="p">,</span><span class="w">
             </span><span class="s2">"r_squared"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
             </span><span class="s2">"correlation"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
             </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Based on quarter over quarter quarterly growth rates."</span><span class="p">,</span><span class="w">
             </span><span class="s2">"queries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
                 </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1916255</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1916258</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">768</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"metric_periodicity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Quarter_Over_Quarter"</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"metric_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7Park Data"</span><span class="w">
                 </span><span class="p">},</span><span class="w">
                 </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1916255</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">704</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1916258</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">694</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"metric_periodicity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Quarter_Over_Quarter"</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"metric_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"reported"</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">]</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"forecast"</span><span class="p">:</span><span class="w"> </span><span class="mf">64069.7707137404</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"forecast"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
             </span><span class="s2">"r_squared"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
             </span><span class="s2">"correlation"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
             </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Based on year over year quarterly growth rates."</span><span class="p">,</span><span class="w">
             </span><span class="s2">"queries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
                 </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1916255</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1916258</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">768</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"metric_periodicity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Year_Over_Year"</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"metric_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7Park Data"</span><span class="w">
                 </span><span class="p">},</span><span class="w">
                 </span><span class="p">{</span><span class="w">
-                    </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1916255</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">704</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1916258</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">694</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"metric_periodicity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Year_Over_Year"</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"metric_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"reported"</span><span class="w">
                 </span><span class="p">}</span><span class="w">
@@ -1497,12 +1528,12 @@ The access token expires every 24 hours. After which, you must get a new one to 
 </blockquote>
 <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/company/14301/metric/740/entity/1940111/forecast/history"</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://api.7parkdata.com/company/5820/metric/740/entity/1928293/forecast/history"</span>
 <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">"Authorization"</span> <span class="p">:</span> <span class="s">"Bearer "</span> <span class="o">+</span> <span class="n">access_token</span><span class="p">}</span>
 <span class="n">response</span><span class="o">=</span><span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
-  <span class="s1">'https://api.7parkdata.com/company/14301/metric/740/entity/1940111/forecast/history'</span> <span class="se">\</span>
+  <span class="s1">'https://api.7parkdata.com/company/5820/metric/740/entity/1928293/forecast/history'</span> <span class="se">\</span>
   -H <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
 </code></pre>
 <blockquote>
@@ -1511,8 +1542,8 @@ The access token expires every 24 hours. After which, you must get a new one to 
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"reported_metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">704</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1916255</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"reported_metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">694</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"entity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1916258</span><span class="p">,</span><span class="w">
         </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">768</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="s2">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
@@ -1520,21 +1551,37 @@ The access token expires every 24 hours. After which, you must get a new one to 
         </span><span class="p">{</span><span class="w">
             </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">768</span><span class="p">,</span><span class="w">
             </span><span class="s2">"metric_periodicity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Quarter_Over_Quarter"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"entity_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Netflix"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Netflix, Inc."</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"entity_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spotify Music"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spotify"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"period_effective_end_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-31"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"methodology"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unspecified"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"forecast"</span><span class="p">:</span><span class="w"> </span><span class="mf">56060.01019</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"forecast"</span><span class="p">:</span><span class="w"> </span><span class="mf">170.156563</span><span class="p">,</span><span class="w">
             </span><span class="s2">"data_through"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-04-09"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"forecast_unit"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
             </span><span class="s2">"correlation"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
             </span><span class="s2">"period_effective_start_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-01-01"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"r_squared"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"metric_name_reported"</span><span class="p">:</span><span class="w"> </span><span class="s2">"U.S. Subscribers"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"metric_name_reported"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Total MAU"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"metric_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DownloadsAndroidiOS"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"metric_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">768</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"metric_periodicity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Quarter_Over_Quarter"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"entity_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spotify Music"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spotify"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"period_effective_end_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-31"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"methodology"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unspecified"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"forecast"</span><span class="p">:</span><span class="w"> </span><span class="mf">169.881474</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"data_through"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-04-16"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"forecast_unit"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"correlation"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"period_effective_start_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-01-01"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"r_squared"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"metric_name_reported"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Total MAU"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"metric_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DownloadsAndroidiOS"</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
-    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"company name: Netflix, Inc.; entity: Netflix; dimensions: {}; metric: DownloadsAndroidiOS; metric_periodicity: N/A"</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"company name: Spotify; entity: Spotify Music; dimensions: {}; metric: DownloadsAndroidiOS; metric_periodicity: N/A"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Historical forecast info for company, metric and entity.</p>
@@ -1658,7 +1705,7 @@ The access token expires every 24 hours. After which, you must get a new one to 
 <div class="center-column"></div>
 <pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">parklib.sdk.ner</span> <span class="kn">import</span> <span class="n">NER</span>
 <span class="n">ner_result</span> <span class="o">=</span> <span class="n">NER</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
-    <span class="n">source_type</span><span class="o">=</span><span class="s">'news'</span><span class="p">,</span>
+    <span class="n">source_type</span><span class="o">=</span><span class="s">'formal text'</span><span class="p">,</span>
     <span class="n">instances</span><span class="o">=</span><span class="p">[</span><span class="s">"Netflix beats the street."</span><span class="p">,</span><span class="s">"Amazon expands to Austin."</span><span class="p">]</span>
 <span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">ner_result</span><span class="p">)</span>
@@ -1754,13 +1801,13 @@ The access token expires every 24 hours. After which, you must get a new one to 
 </blockquote>
 <pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">parklib.sdk.ner</span> <span class="kn">import</span> <span class="n">NER</span>
 
-<span class="n">ner_result</span> <span class="o">=</span> <span class="n">NER</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">source_type</span><span class="o">=</span><span class="s">'news'</span><span class="p">,</span> <span class="n">instances</span><span class="o">=</span><span class="p">[</span><span class="s">"Apple is a company"</span><span class="p">])</span>
+<span class="n">ner_result</span> <span class="o">=</span> <span class="n">NER</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">source_type</span><span class="o">=</span><span class="s">'formal text'</span><span class="p">,</span> <span class="n">instances</span><span class="o">=</span><span class="p">[</span><span class="s">"Apple is a company"</span><span class="p">])</span>
 <span class="k">print</span><span class="p">(</span><span class="n">ner_result</span><span class="p">)</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl -X POST <span class="se">\</span>
   https://api.7parkdata.com/ner/annotate <span class="se">\</span>
   -H <span class="s1">'Authorization: Bearer {token}'</span> <span class="se">\</span>
   -d <span class="s1">'{
-       "source_type": "news",
+       "source_type": "formal text",
        "instances": [
               "Apple is a company."
        ]
@@ -1798,7 +1845,7 @@ The access token expires every 24 hours. After which, you must get a new one to 
 <td>source_type</td>
 <td>true</td>
 <td>string</td>
-<td>Source type to consider. Options include: <code>news</code>, <code>tweets</code>, and <code>credit card</code></td>
+<td>Source type to consider. Options include: <code>formal text</code>, <code>informal text</code>, and <code>transaction</code></td>
 </tr>
 <tr>
 <td>entity_types</td>
@@ -1821,7 +1868,7 @@ The access token expires every 24 hours. After which, you must get a new one to 
 </blockquote>
 <pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">parklib.sdk.ner</span> <span class="kn">import</span> <span class="n">NER</span>
 
-<span class="n">job_id</span> <span class="o">=</span> <span class="n">NER</span><span class="o">.</span><span class="n">run_job_transform</span><span class="p">(</span><span class="n">source_type</span><span class="o">=</span><span class="s">"news"</span><span class="p">,</span>
+<span class="n">job_id</span> <span class="o">=</span> <span class="n">NER</span><span class="o">.</span><span class="n">run_job_transform</span><span class="p">(</span><span class="n">source_type</span><span class="o">=</span><span class="s">"formal text"</span><span class="p">,</span>
                                <span class="n">entity_types</span><span class="o">=</span><span class="p">[</span><span class="s">"NE_TITLE"</span><span class="p">,</span> <span class="s">"NE_PERSON"</span><span class="p">],</span>
                                <span class="n">input_path</span><span class="o">=</span><span class="s">"s3://7parkdata/example.jsonl"</span><span class="p">,</span>
                                <span class="n">output_path</span><span class="o">=</span><span class="s">"s3://7parkdata/output"</span><span class="p">)</span>
@@ -1847,7 +1894,7 @@ The access token expires every 24 hours. After which, you must get a new one to 
 <td>source_type</td>
 <td>true</td>
 <td>string</td>
-<td>Source type to consider. Options include: <code>news</code>, <code>tweets</code>, and <code>credit card</code></td>
+<td>Source type to consider. Options include: <code>formal text</code>, <code>informal text</code>, and <code>transaction</code></td>
 </tr>
 <tr>
 <td>entity_types</td>
@@ -1910,7 +1957,9 @@ The access token expires every 24 hours. After which, you must get a new one to 
 <p>Reduce noise and create a standard lexicon</p>
 
 <p>Gain clarity into your data by disambiguating text to establish a single semantic reference for better analysis and enrichment. Our Cleanse solution efficiently and accurately creates consistent text from natural language or transaction data, expediting work that would otherwise be sidelined by discrepancies in spelling, entry methods and miscategorization.</p>
-<h4 id='make-sure-the-input-file-is-in-a-tsv-tab-separated-value-format'><strong>Make sure the input file is in a tsv(tab separated value) format</strong></h4><h3 id='string-distance'>String Distance</h3>
+
+<p><strong>Make sure the input file is in a tsv(tab separated value) format</strong></p>
+<h3 id='string-distance'>String Distance</h3>
 <p>Run NED - String Distance Model.</p>
 
 <blockquote>
@@ -2048,6 +2097,61 @@ The access token expires every 24 hours. After which, you must get a new one to 
 <td>Stopwords. Example: <code>[“company”, “co”, “corp”, “llc”]</code></td>
 </tr>
 </tbody></table>
+<h3 id='cosine-distance'>Cosine Distance</h3>
+<p>Run NED - Cosine Distance Model.</p>
+
+<blockquote>
+<p>Example Request:</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="kn">from</span> <span class="nn">parklib.sdk.ned</span> <span class="kn">import</span> <span class="n">CosineDistanceNED</span>
+
+<span class="n">job_id</span> <span class="o">=</span> <span class="n">CosineDistanceNED</span><span class="o">.</span><span class="n">run_job_transform</span><span class="p">(</span><span class="n">target_col_index</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                                             <span class="n">input_path</span><span class="o">=</span><span class="s">"s3://7parkdata/example/example.txt"</span><span class="p">,</span>
+                                             <span class="n">output_path</span><span class="o">=</span><span class="s">"s3://7parkdata/example/output"</span><span class="p">,</span>
+                                             <span class="n">column_description</span><span class="o">=</span><span class="p">{</span><span class="s">"0"</span><span class="p">:</span> <span class="s">"name"</span><span class="p">,</span> <span class="s">"1"</span><span class="p">:</span> <span class="s">"article"</span><span class="p">})</span>
+<span class="k">print</span><span class="p">(</span><span class="n">job_id</span><span class="p">)</span>
+</code></pre><pre class="highlight shell tab-shell"><code>
+</code></pre>
+<blockquote>
+<p>Example Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"bulk_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bulk-ned-349f81b4-2fb5-451f-825c-65243610ebfc"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h6 id='parameters-19'>Parameters</h6>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>target_col_index</td>
+<td>true</td>
+<td>integer</td>
+<td>Target column index. <code>0</code> Based. Example: <code>3</code></td>
+</tr>
+<tr>
+<td>input_path</td>
+<td>true</td>
+<td>string</td>
+<td>S3 file path. Example: <a href="https://7p-sdk-examples.s3.amazonaws.com/bulk_ned_example.tsv"><code>s3://7p-sdk-examples/bulk_ned_example.tsv</code></a> The file should be a <code>tab separated value</code> file</td>
+</tr>
+<tr>
+<td>output_path</td>
+<td>true</td>
+<td>string</td>
+<td>S3 folder path. Example: <code>s3://7p-sdk-examples/output</code></td>
+</tr>
+<tr>
+<td>column_description</td>
+<td>true</td>
+<td>dictionary</td>
+<td>Description of the column. Key should be the index of column, value should be the column type. column type must be in [] Example: <code>{“0”: “name”, “1”: “article”}</code></td>
+</tr>
+</tbody></table>
 <h3 id='status-2'>Status</h3>
 <p>Check the status of NED job transform.</p>
 
@@ -2068,7 +2172,7 @@ The access token expires every 24 hours. After which, you must get a new one to 
     </span><span class="s2">"output_path"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h6 id='parameters-19'>Parameters</h6>
+</span></code></pre><h6 id='parameters-20'>Parameters</h6>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2136,7 +2240,7 @@ The access token expires every 24 hours. After which, you must get a new one to 
     </span><span class="s2">"top_website"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.7parkdata.com/"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h6 id='parameters-20'>Parameters</h6>
+</span></code></pre><h6 id='parameters-21'>Parameters</h6>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2201,7 +2305,7 @@ The access token expires every 24 hours. After which, you must get a new one to 
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"bulk_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bulk-nel-349f81b4-2fb5-451f-825c-65243610ebfa"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h6 id='parameters-21'>Parameters</h6>
+</span></code></pre><h6 id='parameters-22'>Parameters</h6>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2243,7 +2347,7 @@ The access token expires every 24 hours. After which, you must get a new one to 
   </span><span class="s2">"output_path"</span><span class="p">:</span><span class="w"> </span><span class="err">None</span><span class="p">,</span><span class="w">
   </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"InProgress"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h6 id='parameters-22'>Parameters</h6>
+</span></code></pre><h6 id='parameters-23'>Parameters</h6>
 <table><thead>
 <tr>
 <th>Parameter</th>
