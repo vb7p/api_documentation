@@ -2,9 +2,9 @@
 title: 7Park Data API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
-  - python: Python
   - shell: cURL
-
+  - python: Python
+  
 toc_footers:
   - <a href='https://account.7parkdata.com/#/akm_key/'>Sign Up for a Developer Key</a>
   - <a href='mailto:support@7parkdata.com'>Contact Us</a>
